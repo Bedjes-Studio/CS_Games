@@ -1,0 +1,40 @@
+require('dotenv').config();
+
+let env = process.env.NODE_ENV.trim(); // 'dev' or 'prod'
+
+// TODO : add sql config
+
+const dev = {
+    server: {
+        port: parseInt(process.env.DEV_SERVER_PORT) || 3000,
+        key: parseInt(process.env.DEV_SERVER_KEY) || "azerty",
+        tokenDuration: parseInt(process.env.DEV_SERVER_TOKEN_DURATION) || "24h"
+    },
+    sql: {
+        host: process.env.DEV_SQL_HOST || 'sql://127.0.0.1',
+        port: parseInt(process.env.DEV_SQL_PORT) || 27017,
+        name: process.env.DEV_SQL_NAME || 'dev'
+    }
+};
+
+const prod = {
+    server: {
+        port: parseInt(process.env.PROD_SERVER_PORT) || 3000,
+        key: parseInt(process.env.PROD_SERVER_KEY) || "azerty",
+        tokenDuration: parseInt(process.env.PROD_SERVER_TOKEN_DURATION) || "24h"
+    },
+    sql: {
+        host: process.env.PROD_SQL_HOST || '127.0.0.1',
+        port: parseInt(process.env.PROD_SQL_PORT) || 27017,
+        name: process.env.PROD_SQL_NAME || 'prod'
+    }
+};
+
+const config = {
+    dev,
+    prod
+};
+
+console.log(config[env]);
+
+module.exports = config[env];
