@@ -8,13 +8,13 @@ const config = require('./config');
 // app.use('/api/user', userRoutes);
 
 var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "mysql"
+    host: config.sql.host,
+    user: config.sql.user,
+    password: config.sql.password
 });
 
 con.connect(function (err) {
-    if (err) throw err;
+    if (err) throw("Connection to connect to sql server failed :" + err);
     console.log("Connected!");
 });
 

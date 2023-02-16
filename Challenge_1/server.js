@@ -3,7 +3,7 @@ const app = require('./app');
 const config = require('./config');
 
 
-const port = config.server.port || '3000';
+const port = config.server.port || '3006';
 app.set('port', port);
 
 const errorHandler = error => {

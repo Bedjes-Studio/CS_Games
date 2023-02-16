@@ -11,9 +11,9 @@ const dev = {
         tokenDuration: parseInt(process.env.DEV_SERVER_TOKEN_DURATION) || "24h"
     },
     sql: {
-        host: process.env.DEV_SQL_HOST || 'sql://127.0.0.1',
-        port: parseInt(process.env.DEV_SQL_PORT) || 27017,
-        name: process.env.DEV_SQL_NAME || 'dev'
+        host: process.env.DEV_SQL_HOST || "localhost",
+        user: process.env.DEV_SQL_USER || "root",
+        password: process.env.DEV_SQL_PASSWORD || "mysql"
     }
 };
 

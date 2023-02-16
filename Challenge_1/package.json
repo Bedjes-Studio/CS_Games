@@ -4,25 +4,26 @@
     "description": "Challenge 1 of CS Games 2023",
     "main": "server.js",
     "scripts": {
-      "nodemon-dev": "set NODE_ENV=dev && nodemon server.js",
-      "nodemon-prod": "set NODE_ENV=prod && nodemon server.js"
+        "nodemon-dev": "set NODE_ENV=dev && nodemon server.js",
+        "nodemon-prod": "set NODE_ENV=prod && nodemon server.js"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/Bedjes-Studio/CS_Games"
+        "type": "git",
+        "url": "git+https://github.com/Bedjes-Studio/CS_Games"
     },
     "author": "Bedjes Studio",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/Bedjes-Studio/CS_Games/issues"
+        "url": "https://github.com/Bedjes-Studio/CS_Games/issues"
     },
     "homepage": "https://github.com/Bedjes-Studio/CS_Games#readme",
     "dependencies": {
-      "bcrypt": "^5.1.0",
-      "dotenv": "^16.0.3",
-      "express": "^4.18.2",
-      "jsonwebtoken": "^9.0.0",
-      "nodemon": "^2.0.20"
+        "bcrypt": "^5.1.0",
+        "dotenv": "^16.0.3",
+        "ejs": "^3.1.8",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.20"
     }
-  }
-  
+}
