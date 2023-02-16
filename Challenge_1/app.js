@@ -1,23 +1,33 @@
 const express = require('express');
 const ejs = require('ejs');
+var mysql = require('mysql');
+const config = require('./config');
 
-// const config = require('./config');
-
+// https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server
 // const userRoutes = require('./routes/user');
+// app.use('/api/user', userRoutes);
+
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "mysql"
+});
+
+con.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected!");
+});
 
 const app = express();
 app.use(express.json());
 app.set('view engine', 'ejs');
 
-// TODO : connect SQL here
-
-// app.use('/api/user', userRoutes);
 
 app.use('/online', (req, res, next) => {
     res.status(200).json({
         message: 'server is online'
     });
-} );
+});
 
 app.use('/profile', (req, res, next) => {
     res.render('page/profile');
