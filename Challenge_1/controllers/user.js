@@ -28,13 +28,15 @@ exports.login = (req, res, next) => {
             // If the account exists
             if (results.length > 0) {
 
-                console.log(results);
-
                 bcrypt.compare(req.body.password, results[0].password)
                     .then(valid => {
                         if (!valid) {
-                            return res.status(401).json({ error: 'Incorrect Username and/or Password!' });
+                            return res.status(401).json({ message: 'Incorrect Username and/or Password!' });
                         }
+                        res.cookie('AUTH_COOKIE', jwt.sign(
+                            { username: req.body.username },
+                            config.server.key,
+                            { expiresIn: config.server.tokenDuration }));
                         res.status(200).json({
                             token: jwt.sign(
                                 { username: req.body.username },
@@ -43,16 +45,12 @@ exports.login = (req, res, next) => {
                             )
                         });
                     })
-                    .catch(error => {console.log(error); res.status(500).json({ error })});
+                    .catch(error => { console.log(error); res.status(500).json({ error }) });
             } else {
-                res.status(200).json({
-                    message: 'Incorrect Username and/or Password!'
-                });
+                res.status(401).json({ message: 'Incorrect Username and/or Password!' });
             }
         });
     } else {
-        res.status(200).json({
-            message: 'Please enter Username and Password!'
-        });
+        res.status(401).json({ message: 'Please enter Username and Password!' });
     }
 }

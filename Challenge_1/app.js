@@ -1,5 +1,7 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
+const cookie = require('./middleware/cookie');
 const frontRoutes = require('./routes/front');
 const apiRoutes = require('./routes/api');
 
@@ -9,6 +11,7 @@ const apiRoutes = require('./routes/api');
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 /*
@@ -21,7 +24,13 @@ app.get('/online', (req, res, next) => {
     });
 });
 
-app.use('/api', apiRoutes);
-app.use('/', frontRoutes);
+app.get('/cookie', (req, res, next) => {
+    res.clearCookie("AUTH_COOKIE");
+    res.end()
+
+});
+
+app.use('/api', cookie, apiRoutes);
+app.use('/', cookie, frontRoutes);
 
 module.exports = app;
