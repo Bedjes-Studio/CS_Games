@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const userRoutes = require('./user');
 
-// router.post('/create', auth, carCtrl.createCar);
+router.use('/user', userRoutes);
 
 module.exports = router;

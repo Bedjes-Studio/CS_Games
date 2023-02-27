@@ -2,8 +2,6 @@ require('dotenv').config();
 
 let env = process.env.NODE_ENV.trim(); // 'dev' or 'prod'
 
-// TODO : add sql config
-
 const dev = {
     server: {
         port: parseInt(process.env.DEV_SERVER_PORT) || 3000,
@@ -13,7 +11,8 @@ const dev = {
     sql: {
         host: process.env.DEV_SQL_HOST || "localhost",
         user: process.env.DEV_SQL_USER || "root",
-        password: process.env.DEV_SQL_PASSWORD || "mysql"
+        password: process.env.DEV_SQL_PASSWORD || "mysql",
+        database: process.env.DEV_SQL_DATABASE || "ctf1"
     }
 };
 
