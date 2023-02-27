@@ -1,21 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include('../template/head'); %>
+	<%- include('../template/head'); %>
 </head>
+
 <body class="container">
 
-<header>
-  <%- include('../template/header'); %>
-</header>
+	<header>
+		<%- include('../template/header'); %>
+	</header>
 
-<main>
-    <p>This is login page</p>
-</main>
+	<main>
+		<form>
+			<!-- Email input -->
+			<div class="form-outline mb-4">
+				<input id="usernameInput" type="text" class="form-control" />
+				<label class="form-label" for="usernameInput">Email address</label>
+			</div>
 
-<footer>
-  <%- include('../template/footer'); %>
-</footer>
+			<!-- Password input -->
+			<div class="form-outline mb-4">
+				<input id="passwordInput" type="password" class="form-control" />
+				<label class="form-label" for="passwordInput">Password</label>
+			</div>
+
+			<!-- TODO : add forget password ? -->
+
+			<!-- Submit button -->
+			<button id="sumitButton" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+			<p id="errorMessages">
+			</p>
+		</form>
+	</main>
+
+	<footer>
+		<script>
+			const form = {
+				email: $("#usernameInput"),
+				password: $("#passwordInput"),
+				submit: $("#sumitButton"),
+				messages: $("#errorMessages"),
+			};
+
+			let button = form.submit.click(() => {
+				const login = "/api/user/login";
+
+				fetch(login, {
+					method: "POST",
+					headers: {
+						Accept: "application/json, text/plain, */*",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						username: form.email.val(),
+						password: form.password.val(),
+					}),
+				})
+					.then((response) => {
+
+						response.json().then(data => ({ status: response.status, body: data }))
+							.then(res => {
+								if (res.status == 401) {
+									// form.messages.text("login noooo");
+
+									form.messages.text(res.body.message);
+								}
+								if (res.status == 200) {
+									let token =  res.body.token;
+									console.log("token : " + token)
+
+									form.messages.text("login ok");
+									// save cookie and redirect to main page
+								}
+							});
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			});
+		</script>
+
+		<%- include('../template/footer'); %>
+	</footer>
 
 </body>
+
 </html>
