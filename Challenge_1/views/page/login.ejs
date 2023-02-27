@@ -8,9 +8,9 @@
 <body class="container">
 
 	<header>
-		<%- include('../template/header'); %>
+		<%- include('../template/header', {isLogged}); %>
 	</header>
-
+	
 	<main>
 		<form>
 			<!-- Email input -->
@@ -68,11 +68,8 @@
 									form.messages.text(res.body.message);
 								}
 								if (res.status == 200) {
-									let token =  res.body.token;
-									console.log("token : " + token)
-
+									// redirect to main page
 									form.messages.text("login ok");
-									// save cookie and redirect to main page
 								}
 							});
 					})

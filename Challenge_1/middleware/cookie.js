@@ -2,24 +2,29 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 
 module.exports = (req, res, next) => {
-    console.log(req.cookies);
-    console.log(req.cookies['AUTH_COOKIE']);
 
     if (req.cookies['AUTH_COOKIE'] != undefined) {
-        let token = req.cookies['AUTH_COOKIE'];
-        let decodedToken = jwt.verify(token, config.api.key);
-        let username = decodedToken.username;
+        try {
+            let token = req.cookies['AUTH_COOKIE'];
+            let decodedToken = jwt.verify(token, config.server.key);
+            let username = decodedToken.username;
 
+            req.auth = {
+                isLogged: true,
+                // TODO : add level for user and admin
+                username: username,
+            };
+            next();
+
+        } catch (error) {
+            console.log(error);
+            res.status(401).json({ "auth error": error });
+        }
+    } else {
         req.auth = {
-            isLogged: true,
-            // TODO : add level for user and admin
-            username: username,
+            isLogged: false,
         };
+
+        next();
     }
-
-    req.auth = {
-        isLogged: false,
-    };
-
-    next();
 };

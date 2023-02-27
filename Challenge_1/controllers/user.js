@@ -33,17 +33,13 @@ exports.login = (req, res, next) => {
                         if (!valid) {
                             return res.status(401).json({ message: 'Incorrect Username and/or Password!' });
                         }
-                        res.cookie('AUTH_COOKIE', jwt.sign(
+
+                        let token = jwt.sign(
                             { username: req.body.username },
                             config.server.key,
-                            { expiresIn: config.server.tokenDuration }));
-                        res.status(200).json({
-                            token: jwt.sign(
-                                { username: req.body.username },
-                                config.server.key,
-                                { expiresIn: config.server.tokenDuration }
-                            )
-                        });
+                            { expiresIn: config.server.tokenDuration });
+                        res.cookie('AUTH_COOKIE', token);
+                        res.status(200).json({ token: token });
                     })
                     .catch(error => { console.log(error); res.status(500).json({ error }) });
             } else {

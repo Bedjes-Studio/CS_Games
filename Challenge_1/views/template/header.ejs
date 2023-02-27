@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">Casino atlantis</a>
 
-  <% if(true) { %>
+  <% if(!isLogged) { %>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="/login">Login</a>
@@ -15,10 +15,35 @@
         <li class="nav-item">
           <p>photo</p>
         </li>
+
         <li class="nav-item">
           <p>pseudo</p>
         </li>
+
+        <li class="nav-item">
+          <button id="disconnectButton" type="button" class="btn btn-primary btn-block mb-4">Logout</button>
+        </li>
       </ul>
+
+      <script>
+
+        $("#disconnectButton").click(() => {
+
+          fetch("/cookie", {
+            method: "GET",
+            headers: {
+              Accept: "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => {
+              // redirect to main page
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+      </script>
       <% } %>
 
 
