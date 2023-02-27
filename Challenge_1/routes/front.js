@@ -14,6 +14,11 @@ router.get('/login', (req, res, next) => {
     });
 });
 
+router.get('/logout', (req, res, next) => {
+    res.clearCookie("AUTH_COOKIE");
+    res.redirect('/');
+});
+
 router.get('/slots/', (req, res, next) => {
     res.render('page/slots', {
         isLogged: req.auth.isLogged

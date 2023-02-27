@@ -25,9 +25,8 @@ app.get('/online', (req, res, next) => {
 });
 
 app.get('/cookie', (req, res, next) => {
-    res.clearCookie("AUTH_COOKIE");
-    res.end()
 
+    res.end()
 });
 
 app.use('/api', cookie, apiRoutes);

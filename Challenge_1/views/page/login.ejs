@@ -10,7 +10,7 @@
 	<header>
 		<%- include('../template/header', {isLogged}); %>
 	</header>
-	
+
 	<main>
 		<form>
 			<!-- Email input -->
@@ -64,12 +64,11 @@
 							.then(res => {
 								if (res.status == 401) {
 									// form.messages.text("login noooo");
-
 									form.messages.text(res.body.message);
 								}
 								if (res.status == 200) {
 									// redirect to main page
-									form.messages.text("login ok");
+									window.location.replace("/");
 								}
 							});
 					})

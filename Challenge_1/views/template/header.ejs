@@ -21,28 +21,28 @@
         </li>
 
         <li class="nav-item">
-          <button id="disconnectButton" type="button" class="btn btn-primary btn-block mb-4">Logout</button>
+          <a id="disconnectButton" type="button" href="/logout" class="btn btn-primary btn-block mb-4">Logout</a>
         </li>
       </ul>
 
       <script>
 
-        $("#disconnectButton").click(() => {
+        // $("#disconnectButton").click(() => {
 
-          fetch("/cookie", {
-            method: "GET",
-            headers: {
-              Accept: "application/json, text/plain, */*",
-              "Content-Type": "application/json",
-            },
-          })
-            .then((response) => {
-              // redirect to main page
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
+        //   fetch("/cookie", {
+        //     method: "GET",
+        //     headers: {
+        //       Accept: "application/json, text/plain, */*",
+        //       "Content-Type": "application/json",
+        //     },
+        //   })
+        //     .then((response) => {
+        //       // redirect to main page
+        //     })
+        //     .catch((err) => {
+        //       console.log(err);
+        //     });
+        // });
       </script>
       <% } %>
 
