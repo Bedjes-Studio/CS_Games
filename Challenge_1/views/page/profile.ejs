@@ -1,21 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <%- include('../template/head'); %>
 </head>
+
 <body class="container">
 
-<header>
-  <%- include('../template/header', {isLogged}); %>
-</header>
+  <header>
+    <%- include('../template/header', {isLogged}); %>
+  </header>
 
-<main>
+  <main>
     <p>This is profile page</p>
-</main>
 
-<footer>
-  <%- include('../template/footer'); %>
-</footer>
+    <p>my picture</p>
+    <input type="file" id="myfile" name="myfile" />
+
+    <p>my username</p>
+    <p>my prenium status</p>
+
+    <p>Reviews ! See by our team</p>
+
+    <form>
+      <!-- Review input -->
+      <div class="form-outline mb-4">
+        <input id="reviewInput" type="text" class="form-control" />
+        <label class="form-label" for="usernameInput">Email address</label>
+      </div>
+
+      <!-- Submit button -->
+      <button id="sumitButton" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+      <p id="confirmMessage">
+      </p>
+    </form>
+
+    <script>
+
+      $("#myfile").change(function () {
+        // alert("A file has been selected.");
+        // fetch 
+        // https://stackoverflow.com/questions/48284011/how-to-post-image-with-fetch
+        // const fileInput = document.querySelector('#your-file-input');
+        // const formData = new FormData();
+
+        // formData.append('file', fileInput.files[0]);
+
+        // const options = {
+        //   method: 'POST',
+        //   body: formData,
+        //   // If you add this, upload won't work
+        //   // headers: {
+        //   //   'Content-Type': 'multipart/form-data',
+        //   // }
+        // };
+
+        // fetch('your-upload-url', options);
+      });
+
+      const form = {
+        review: $("#reviewInput"),
+        submit: $("#sumitButton"),
+        messages: $("#confirmMessage"),
+
+      };
+
+      let button = form.submit.click(() => {
+        const login = "/api/user/review";
+
+        fetch(login, {
+          method: "POST",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            review: form.review.val(),
+          }),
+        })
+          .then((response) => {
+            if (response.status == 200) {
+              form.messages.text('merci!');
+            } else {
+              // form.messages.text(res.body.message);
+              form.messages.text('error');
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    </script>
+  </main>
+
+  <footer>
+    <%- include('../template/footer'); %>
+  </footer>
 
 </body>
+
 </html>

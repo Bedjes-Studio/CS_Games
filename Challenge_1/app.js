@@ -24,11 +24,6 @@ app.get('/online', (req, res, next) => {
     });
 });
 
-app.get('/cookie', (req, res, next) => {
-
-    res.end()
-});
-
 app.use('/api', cookie, apiRoutes);
 app.use('/', cookie, frontRoutes);
 
