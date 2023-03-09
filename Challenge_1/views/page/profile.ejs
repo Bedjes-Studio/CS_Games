@@ -39,24 +39,20 @@
     <script>
 
       $("#myfile").change(function () {
-        // alert("A file has been selected.");
+        alert("A file has been selected.");
         // fetch 
         // https://stackoverflow.com/questions/48284011/how-to-post-image-with-fetch
-        // const fileInput = document.querySelector('#your-file-input');
-        // const formData = new FormData();
+        const fileInput = document.querySelector('#myfile');
+        const formData = new FormData();
 
-        // formData.append('file', fileInput.files[0]);
+        formData.append('picture', fileInput.files[0]);
 
-        // const options = {
-        //   method: 'POST',
-        //   body: formData,
-        //   // If you add this, upload won't work
-        //   // headers: {
-        //   //   'Content-Type': 'multipart/form-data',
-        //   // }
-        // };
+        const options = {
+          method: 'POST',
+          body: formData,
+        };
 
-        // fetch('your-upload-url', options);
+        fetch('/api/user/updatePicture', options);
       });
 
       const form = {
