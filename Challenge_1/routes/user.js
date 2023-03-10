@@ -9,6 +9,7 @@ const upload = multer({
     // you might also want to set some limits: https://github.com/expressjs/multer#limits
 });
 
+// TODO : check login filter
 router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 router.post("/review", userCtrl.review);

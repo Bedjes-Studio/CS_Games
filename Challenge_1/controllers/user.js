@@ -13,7 +13,6 @@ exports.signup = (req, res, next) => {
                 [req.body.username, hash, req.body.email],
                 function (error, results, fields) {
                     if (error) throw error;
-                    console.log(results);
 
                     res.status(200).json({
                         message: "Account created!",
@@ -58,7 +57,6 @@ exports.login = (req, res, next) => {
 exports.review = (req, res, next) => {
     if (req.body.review) {
         date = new Date().toISOString().slice(0, 19).replace("T", " ");
-        console.log(date);
         db.query(
             "INSERT INTO reviews (creator, text, date) VALUES (?, ?, ?)",
             [req.auth.username, req.body.review, date],
@@ -89,12 +87,22 @@ exports.updatePicture = (req, res, next) => {
 
         // TODO : add exploit extention
         // TODO : save in db
+        console.log(    );
         if (path.extname(req.file.originalname).toLowerCase() === ".png") {
             fs.rename(tempPath, targetPath, (err) => {
                 if (err) {
                     res.status(500).json({ message: err });
                 }
-                res.status(200).json({ message: "New picture uploaded!" });
+                db.query(
+                    " UPDATE user SET picture = ? WHERE username = ?",
+                    [req.file.originalname, req.auth.username],
+                    function (error, results, fields) {
+                        if (err) {
+                            res.status(500).json({ message: err });
+                        }
+                        res.status(200).json({ message: "New picture uploaded!" });
+                    }
+                );
             });
         } else {
             fs.unlink(tempPath, (err) => {
@@ -105,6 +113,6 @@ exports.updatePicture = (req, res, next) => {
             });
         }
     } else {
-        res.status(403).json({ message: "You have to be logged first" });
+        res.status(403).json({ message: "You have to be logged first." });
     }
 };
