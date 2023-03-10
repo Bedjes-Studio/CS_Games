@@ -9,7 +9,7 @@ exports.signup = (req, res, next) => {
         .hash(req.body.password, 10)
         .then((hash) => {
             db.query(
-                "INSERT INTO user (username, password, email, picture) VALUES (?, ?, ?, default.png)",
+                "INSERT INTO users (username, password, email, picture) VALUES (?, ?, ?, default.png)",
                 [req.body.username, hash, req.body.email],
                 function (error, results, fields) {
                     if (error) throw error;
@@ -25,7 +25,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     if (req.body.username && req.body.password) {
-        db.query("SELECT * FROM user WHERE username = ?", [req.body.username], function (error, results, fields) {
+        db.query("SELECT * FROM users WHERE username = ?", [req.body.username], function (error, results, fields) {
             // If the account exists
             if (results.length > 0) {
                 bcrypt
@@ -58,7 +58,7 @@ exports.review = (req, res, next) => {
     if (req.body.review) {
         date = new Date().toISOString().slice(0, 19).replace("T", " ");
         db.query(
-            "INSERT INTO reviews (creator, text, date) VALUES (?, ?, ?)",
+            "INSERT INTO reviews (username, text, date) VALUES (?, ?, ?)",
             [req.auth.username, req.body.review, date],
             function (error, results, fields) {
                 if (error) throw error;
@@ -94,7 +94,7 @@ exports.updatePicture = (req, res, next) => {
                     res.status(500).json({ message: err });
                 }
                 db.query(
-                    " UPDATE user SET picture = ? WHERE username = ?",
+                    " UPDATE users SET picture = ? WHERE username = ?",
                     [req.file.originalname, req.auth.username],
                     function (error, results, fields) {
                         if (err) {

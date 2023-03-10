@@ -18,8 +18,26 @@
     <img src="/public/<%-picture%>" alt="Profile picture" width="100" height="100">
     <input type="file" id="myfile" name="myfile" />
 
+    <a class="nav-link" href="/profile?pre=whales">whales</a>
+    <a class="nav-link" href="/profile?pre=slots">slots</a>
+    <a class="nav-link" href="/profile?pre=shifts">shifts</a>
+
     <p>my username</p>
     <p>my prenium status</p>
+    <% if (locals.pre ) { %>
+    <% if (pre=="slots" ) { %>
+    <p>PRE IS SLOTS</p>
+    <% } %>
+
+    <% if (pre=="whales" ) { %>
+    <p>PRE IS whales</p>
+    <% } %>
+
+    <% if (pre=="shifts" ) { %>
+    <p>PRE IS shifts</p>
+    <% } %>
+
+    <% } %>
 
     <p>Reviews ! See by our team</p>
 
@@ -38,7 +56,7 @@
     </form>
 
     <script>
-      $("#myfile").change(function () {
+      $("#myfile").change(function() {
         alert("A file has been selected.");
         // fetch 
         // https://stackoverflow.com/questions/48284011/how-to-post-image-with-fetch
@@ -66,15 +84,15 @@
         const login = "/api/user/review";
 
         fetch(login, {
-          method: "POST",
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            review: form.review.val(),
-          }),
-        })
+            method: "POST",
+            headers: {
+              Accept: "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              review: form.review.val(),
+            }),
+          })
           .then((response) => {
             if (response.status == 200) {
               form.messages.text('merci!');

@@ -2,18 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-router.get("/profile", (req, res, next) => {
-    if (req.auth.isLogged) {
-        db.query("SELECT picture FROM user WHERE username = ?", [req.auth.username], function (error, results, fields) {
-            res.render("page/profile", {
-                isLogged: req.auth.isLogged,
-                picture: results[0].picture,
-            });
-        });
-    } else {
-        res.redirect("/");
-    }
-});
+const frontCtrl = require("../controllers/front");
+router.get("/profile", frontCtrl.profile);
 
 router.get("/prenium", (req, res, next) => {
     res.render("page/prenium", {

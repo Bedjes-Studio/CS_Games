@@ -1,8 +1,8 @@
 const express = require("express");
 const multer = require("multer");
-const userCtrl = require("../controllers/user");
-
 const router = express.Router();
+
+const userCtrl = require("../controllers/user");
 
 const upload = multer({
     dest: "../temp/image.png",
