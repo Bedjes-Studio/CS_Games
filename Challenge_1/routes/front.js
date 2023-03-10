@@ -4,8 +4,12 @@ const db = require("../db");
 
 router.get("/profile", (req, res, next) => {
     if (req.auth.isLogged) {
-        res.render("page/profile", {
-            isLogged: req.auth.isLogged,
+        db.query("SELECT picture FROM user WHERE username = ?", [req.auth.username], function (error, results, fields) {
+            console.log(results[0].picture);
+            res.render("page/profile", {
+                isLogged: req.auth.isLogged,
+                picture: results[0].picture,
+            });
         });
     } else {
         res.redirect("/");

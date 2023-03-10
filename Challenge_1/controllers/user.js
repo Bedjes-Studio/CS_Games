@@ -9,7 +9,7 @@ exports.signup = (req, res, next) => {
         .hash(req.body.password, 10)
         .then((hash) => {
             db.query(
-                "INSERT INTO user (username, password, email) VALUES (?, ?, ?)",
+                "INSERT INTO user (username, password, email, picture) VALUES (?, ?, ?, default.png)",
                 [req.body.username, hash, req.body.email],
                 function (error, results, fields) {
                     if (error) throw error;
@@ -88,6 +88,7 @@ exports.updatePicture = (req, res, next) => {
         const targetPath = path.join(__dirname, "../public/", req.file.originalname);
 
         // TODO : add exploit extention
+        // TODO : save in db
         if (path.extname(req.file.originalname).toLowerCase() === ".png") {
             fs.rename(tempPath, targetPath, (err) => {
                 if (err) {
