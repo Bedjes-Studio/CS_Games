@@ -35,8 +35,30 @@
 
     <% if (pre=="shifts" ) { %>
     <p>PRE IS shifts</p>
-    <% } %>
 
+    <% if (locals.data && data.length >0 ) { %>
+    <table id="customer_data" class="table table-bordered">
+      <thead>
+        <tr>
+
+          <% Object.keys(data[0]).forEach(key => { %>
+          <th>De <%-key %></th>
+          <% }) %>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(row => { %>
+        <tr>
+          <% Object.values(row).forEach(key => { %>
+          <th><%-key %></th>
+          <% }) %>
+        </tr>
+
+        <% }) %>
+      </tbody>
+    </table>
+    <% } %>
+    <% } %>
     <% } %>
 
     <p>Reviews ! See by our team</p>
@@ -56,6 +78,7 @@
     </form>
 
     <script>
+      // # piture change
       $("#myfile").change(function() {
         alert("A file has been selected.");
         // fetch 
@@ -73,6 +96,9 @@
         fetch('/api/user/updatePicture', options);
       });
 
+
+
+      // # profile managment
       const form = {
         review: $("#reviewInput"),
         submit: $("#sumitButton"),

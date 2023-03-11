@@ -24,7 +24,6 @@ function displayClientProfile(req, res, picture) {
 
 function displayAdminProfile(req, res, picture) {
     let pre = req.query.pre;
-    console.log(pre);
 
     checkPreSection(res, pre);
 
@@ -40,23 +39,23 @@ function displayAdminProfile(req, res, picture) {
 
         case "shifts":
             let week = req.query.week;
-            console.log(week);
 
             checkWeek(res, week);
 
-            // TODO request return nothing
-            db.query(
-                "SELECT * FROM shifs WHERE username = ? AND week = ?",
-                [req.auth.username, week],
-                function (error, results, fields) {
-                    console.log(results);
-                    res.render("page/dealerProfile", {
-                        isLogged: req.auth.isLogged,
-                        picture: picture,
-                        pre: pre,
-                    });
-                }
-            );
+            let query = "SELECT * FROM shifts WHERE username = '" + req.auth.username + "' AND week = '" + week + "'";
+            console.log(query);
+
+            // TODO : check sql errors !!!
+            db.query(query, (error, results, fields) => {
+                console.log(error);
+                console.log(results);
+                res.render("page/dealerProfile", {
+                    isLogged: req.auth.isLogged,
+                    picture: picture,
+                    pre: pre,
+                    data: results[0],
+                });
+            });
     }
 }
 
