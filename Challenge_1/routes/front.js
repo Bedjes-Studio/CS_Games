@@ -50,7 +50,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.use("*", (req, res, next) => {
-    res.render("page/404", {
+    res.status(404).render("page/404", {
         isLogged: req.auth.isLogged,
     });
 });

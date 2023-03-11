@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const db = require("../db");
 const config = require("../config");
+const fs = require("fs");
+const path = require("path");
 
 // TODO : Hide this request later
 exports.signup = (req, res, next) => {
@@ -72,11 +74,6 @@ exports.review = (req, res, next) => {
         res.status(401).json({ message: "Please enter review!" });
     }
 };
-
-const fs = require("fs");
-const path = require("path");
-
-//https://stackoverflow.com/questions/15772394/how-to-upload-display-and-save-images-using-node-js-and-express
 
 // Injection with filename possible, care about destroing server files ?
 exports.updatePicture = (req, res, next) => {
