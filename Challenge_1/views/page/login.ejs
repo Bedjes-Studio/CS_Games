@@ -12,27 +12,35 @@
 	</header>
 
 	<main>
-		<form>
-			<!-- Email input -->
-			<div class="form-outline mb-4">
-				<input id="usernameInput" type="text" class="form-control" />
-				<label class="form-label" for="usernameInput">Email address</label>
-			</div>
 
-			<!-- Password input -->
-			<div class="form-outline mb-4">
-				<input id="passwordInput" type="password" class="form-control" />
-				<label class="form-label" for="passwordInput">Password</label>
-			</div>
+		<div class="section">
+            <h1 class="section-title">Connexion</h1>
+            <div class="section-content">
+                <form>
+					<!-- Email input -->
+					<div class="form-outline mb-4">
+						<input id="usernameInput" type="text" class="form-control" />
+						<label class="form-label" for="usernameInput">Nom d'utilisateur</label>
+					</div>
+		
+					<!-- Password input -->
+					<div class="form-outline mb-4">
+						<input id="passwordInput" type="password" class="form-control" />
+						<label class="form-label" for="passwordInput">Mot de passe</label>
+					</div>
+		
+					<!-- TODO : add forget password ? -->
+		
+					<!-- Submit button -->
+					<button id="sumitButton" type="button" class="btn btn-primary btn-block mb-4">Se connecter</button>
+		
+					<p id="errorMessages">
+					</p>
+				</form>
+            </div>
+        </div>
 
-			<!-- TODO : add forget password ? -->
-
-			<!-- Submit button -->
-			<button id="sumitButton" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-
-			<p id="errorMessages">
-			</p>
-		</form>
+		
 	</main>
 
 	<footer>

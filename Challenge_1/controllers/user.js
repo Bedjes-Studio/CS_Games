@@ -44,7 +44,7 @@ exports.login = (req, res, next) => {
                     .compare(req.body.password, results[0].password)
                     .then((valid) => {
                         if (!valid) {
-                            return res.status(401).json({ message: "Incorrect Username and/or Password!" });
+                            return res.status(401).json({ message: "Mot de passe ou nom d'utilisateur incorrect" });
                         }
 
                         let token = jwt.sign({ username: req.body.username }, config.server.key, {
@@ -58,7 +58,7 @@ exports.login = (req, res, next) => {
                         res.status(500).json({ error });
                     });
             } else {
-                res.status(401).json({ message: "Incorrect Username and/or Password!" });
+                res.status(401).json({ message: "Mot de passe ou nom d'utilisateur incorrect" });
             }
         });
     } else {

@@ -3,11 +3,14 @@ const router = express.Router();
 const db = require("../db");
 
 const frontCtrl = require("../controllers/front");
+
 router.get("/profile", frontCtrl.profile);
 
 router.get("/prenium", (req, res, next) => {
     res.render("page/prenium", {
         isLogged: req.auth.isLogged,
+        username: req.auth.username,
+        picture: req.auth.picture,
     });
 });
 
@@ -23,36 +26,20 @@ router.get("/logout", (req, res, next) => {
 });
 
 router.get("/slots/", (req, res, next) => {
-    res.render("page/slots", {
-        isLogged: req.auth.isLogged,
-    });
-});
-
-// TODO still using ?
-router.get("/slot/manage", (req, res, next) => {
-    res.render("page/manage", {
-        isLogged: req.auth.isLogged,
-    });
+    res.redirect("/");
 });
 
 // TODO : check if id is valid
 router.get("/slot/:id", (req, res, next) => {
     res.render("page/game", {
         isLogged: req.auth.isLogged,
+        username: req.auth.username,
+        picture: req.auth.picture,
         slotId: req.params.id,
     });
 });
 
-router.get("/", (req, res, next) => {
-    db.query("SELECT * FROM reviews", function (error, results, fields) {
-        res.render("page/index", {
-            isLogged: req.auth.isLogged,
-            username: req.auth.username,
-            picture: req.auth.picture,
-            reviews: results.slice(Math.max(results.length - 3, 1)),
-        });
-    });
-});
+router.get("/", frontCtrl.index);
 
 router.use("*", (req, res, next) => {
     res.status(404).render("page/404", {

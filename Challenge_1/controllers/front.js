@@ -1,5 +1,16 @@
 const db = require("../db");
 
+exports.index = (req, res, next) => {
+    db.query("SELECT * FROM reviews", function (error, results, fields) {
+        res.render("page/index", {
+            isLogged: req.auth.isLogged,
+            username: req.auth.username,
+            picture: req.auth.picture,
+            reviews: results.slice(Math.max(results.length - 3, 1)),
+        });
+    });
+};
+
 // TODO : check admin in router
 exports.profile = (req, res, next) => {
     if (req.auth.isLogged) {
@@ -26,7 +37,7 @@ function displayClientProfile(req, res) {
         username: req.auth.username,
         email: req.auth.email,
         inscription: req.auth.inscription,
-        prenium: "Oui",
+        prenium: "Non",
         picture: req.auth.picture,
     });
 }

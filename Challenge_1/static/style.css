@@ -33,6 +33,9 @@ footer {
 
 .btn-atlantis {
     background-color: #c5e1e4;
+}
+
+.btn-nav {
     max-width: 120px;
     margin: 5px 0px 5px auto;
 }
@@ -75,6 +78,10 @@ footer {
     border-radius: 20px;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.5);
+}
+
+.btn-overlay {
+    background-color: #c5e1e4;
 }
 
 .review-container {

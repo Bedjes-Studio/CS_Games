@@ -30,6 +30,9 @@
                         <p><span class="user-data-highlight">Adresse email :</span> <%-email%></p>
                         <p><span class="user-data-highlight">Inscrit depuis le :</span> <%-inscription.getDate() %> / <%-inscription.getMonth() %> / <%-inscription.getFullYear() %></p>
                         <p><span class="user-data-highlight">Status Prenium :</span> <%-prenium%></p>
+                        <% if (prenium=="Non" ) { %>
+                            <a class="btn-atlantis btn btn-block" href="/prenium">Devenir prenium</a>
+                        <% } %>
                     </div>
                 </div>
             </div>
