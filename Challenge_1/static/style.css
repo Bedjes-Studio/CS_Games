@@ -1,9 +1,28 @@
+@font-face {
+    font-family: "Montserrat";
+    src: url("font/Montserrat/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-family: "RobotoMono";
+    src: url("font/Roboto_Mono/RobotoMono-Regular.ttf");
+}
+
+:root {
+    --main_font: "Montserrat";
+    --secondary_font: "RobotoMono";
+    --body-background-color: #71b2d7;
+    --user-data-highlight: #5fc4a1;
+}
+
 body {
-    background-color: #71b2d7;
+    background-color: var(--body-background-color);
+    font-family: var(--main_font);
 }
 
 footer {
     background-color: #432e2e;
+    margin-top: 20px;
 }
 
 #main-navbar {
@@ -13,6 +32,12 @@ footer {
 
 .btn-atlantis {
     background-color: #c5e1e4;
+}
+
+.user-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .img-overlay {
@@ -25,6 +50,7 @@ footer {
 .img-cover {
     width: 100%;
     height: auto;
+    border-radius: 20px;
 }
 
 .overlay {
@@ -37,12 +63,13 @@ footer {
     position: absolute;
     top: 50%;
     left: 50%;
+    border-radius: 20px;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.5);
 }
 
 .review-container {
-    background-color: #69C1CD;
+    background-color: #69c1cd;
     border-radius: 20px;
     min-width: 25%;
 }
@@ -63,4 +90,8 @@ footer {
     background-color: #077eb2;
     padding: 10px;
     border-radius: 0 0 20px 20px;
+}
+
+.user-data-highlight {
+    color: var(--user-data-highlight);
 }

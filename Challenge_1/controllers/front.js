@@ -3,11 +3,15 @@ const db = require("../db");
 // TODO : check admin in router
 exports.profile = (req, res, next) => {
     if (req.auth.isLogged) {
-        db.query("SELECT picture FROM users WHERE username = ?", [req.auth.username], (error, results, fields) => {
+        db.query("SELECT * FROM users WHERE username = ?", [req.auth.username], function (error, results, fields) {
+            req.auth.firstName = results[0].firstName;
+            req.auth.lastName = results[0].lastName;
+            req.auth.email = results[0].email;
+            req.auth.inscription = results[0].inscription;
             if (!req.auth.isAdmin) {
-                displayClientProfile(req, res, results[0].picture);
+                displayClientProfile(req, res);
             } else {
-                displayAdminProfile(req, res, results[0].picture);
+                displayAdminProfile(req, res);
             }
         });
     } else {
@@ -15,14 +19,19 @@ exports.profile = (req, res, next) => {
     }
 };
 
-function displayClientProfile(req, res, picture) {
+function displayClientProfile(req, res) {
     res.render("page/profile", {
         isLogged: req.auth.isLogged,
-        picture: picture,
+        identity: req.auth.firstName + " " + req.auth.lastName.toUpperCase(),
+        username: req.auth.username,
+        email: req.auth.email,
+        inscription: req.auth.inscription,
+        prenium: "Oui",
+        picture: req.auth.picture,
     });
 }
 
-function displayAdminProfile(req, res, picture) {
+function displayAdminProfile(req, res) {
     let pre = req.query.pre;
 
     checkPreSection(res, pre);
@@ -32,7 +41,12 @@ function displayAdminProfile(req, res, picture) {
         case "slots":
             res.render("page/dealerProfile", {
                 isLogged: req.auth.isLogged,
-                picture: picture,
+                identity: req.auth.firstName + " " + req.auth.lastName.toUpperCase(),
+                username: req.auth.username,
+                email: req.auth.email,
+                inscription: req.auth.inscription,
+                prenium: "Non",
+                picture: req.auth.picture,
                 pre: pre,
             });
             break;
@@ -49,11 +63,17 @@ function displayAdminProfile(req, res, picture) {
             db.query(query, (error, results, fields) => {
                 console.log(error);
                 console.log(results);
+        
                 res.render("page/dealerProfile", {
                     isLogged: req.auth.isLogged,
-                    picture: picture,
+                    identity: req.auth.firstName + " " + req.auth.lastName.toUpperCase(),
+                    username: req.auth.username,
+                    email: req.auth.email,
+                    inscription: req.auth.inscription,
+                    prenium: "Non",
+                    picture: req.auth.picture,
                     pre: pre,
-                    data: results[0],
+                    data: results,
                 });
             });
     }

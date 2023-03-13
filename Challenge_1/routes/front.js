@@ -47,6 +47,8 @@ router.get("/", (req, res, next) => {
     db.query("SELECT * FROM reviews", function (error, results, fields) {
         res.render("page/index", {
             isLogged: req.auth.isLogged,
+            username: req.auth.username,
+            picture: req.auth.picture,
             reviews: results.slice(Math.max(results.length - 3, 1)),
         });
     });

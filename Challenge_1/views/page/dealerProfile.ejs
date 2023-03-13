@@ -12,11 +12,28 @@
   </header>
 
   <main>
-    <p>This is profile page</p>
+    
+    <div class="section">
+      <h1 class="section-title">Mon profil</h1>
+      <div class="section-content">
+          <div class="d-flex flex-wrap">
 
-    <p>my picture</p>
-    <img src="/public/<%-picture%>" alt="Profile picture" width="100" height="100">
-    <input type="file" id="myfile" name="myfile" />
+              <div class="d-flex flex-column me-3">
+                  <img src="/public/<%-picture%>" alt="Profile picture" width="200" height="200">
+                  <label type="button" for="myfile" class="mt-2 btn-atlantis btn btn-block">Choisir une photo</label>
+                  <input type="file" id="myfile" name="myfile" class="d-none">
+              </div>
+
+              <div class="d-flex flex-column ms-3">
+                  <p><span class="user-data-highlight">Identité :</span> <%-identity %></p>
+                  <p><span class="user-data-highlight">Nom d'utilisateur :</span> <%-username%></p>
+                  <p><span class="user-data-highlight">Adresse email :</span> <%-email%></p>
+                  <p><span class="user-data-highlight">Inscrit depuis le :</span> <%-inscription.getDate() %> / <%-inscription.getMonth() %> / <%-inscription.getFullYear() %></p>
+                  <p><span class="user-data-highlight">Status Prenium :</span> <%-prenium%></p>
+              </div>
+          </div>
+      </div>
+  </div>
 
     <a class="nav-link" href="/profile?pre=whales">whales</a>
     <a class="nav-link" href="/profile?pre=slots">slots</a>

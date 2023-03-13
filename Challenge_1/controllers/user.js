@@ -10,9 +10,19 @@ exports.signup = (req, res, next) => {
     bcrypt
         .hash(req.body.password, 10)
         .then((hash) => {
+            date = new Date().toISOString().slice(0, 19).replace("T", " ");
             db.query(
-                "INSERT INTO users (username, password, balance email, picture) VALUES (?, ?, 0, ?, default.png)",
-                [req.body.username, hash, req.body.email],
+                "INSERT INTO users (username, firstname, lastName, password, balance, email, picture, inscription) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                [
+                    req.body.username,
+                    req.body.firstName,
+                    req.body.lastName,
+                    hash,
+                    0,
+                    req.body.email,
+                    "default.png",
+                    date,
+                ],
                 function (error, results, fields) {
                     if (error) throw error;
 

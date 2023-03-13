@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 
 const cookie = require("./middleware/cookie");
+const pictureExtractor = require("./middleware/pictureExtractor");
 const frontRoutes = require("./routes/front");
 const apiRoutes = require("./routes/api");
 
@@ -27,6 +28,6 @@ app.get("/online", (req, res, next) => {
 app.use("/public", express.static("./public"));
 app.use("/static", express.static("./static"));
 app.use("/api", cookie, apiRoutes);
-app.use("/", cookie, frontRoutes);
+app.use("/", cookie, pictureExtractor, frontRoutes);
 
 module.exports = app;
