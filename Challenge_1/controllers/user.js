@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
         .hash(req.body.password, 10)
         .then((hash) => {
             db.query(
-                "INSERT INTO users (username, password, email, picture) VALUES (?, ?, ?, default.png)",
+                "INSERT INTO users (username, password, balance email, picture) VALUES (?, ?, 0, ?, default.png)",
                 [req.body.username, hash, req.body.email],
                 function (error, results, fields) {
                     if (error) throw error;
@@ -84,7 +84,7 @@ exports.updatePicture = (req, res, next) => {
 
         // TODO : add exploit extention
         // TODO : save in db
-        console.log(    );
+        console.log();
         if (path.extname(req.file.originalname).toLowerCase() === ".png") {
             fs.rename(tempPath, targetPath, (err) => {
                 if (err) {

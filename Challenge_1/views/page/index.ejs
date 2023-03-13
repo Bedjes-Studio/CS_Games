@@ -1,30 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include('../template/head'); %>
+    <%- include('../template/head'); %>
 </head>
+
 <body class="container">
 
-<header>
-  <%- include('../template/header', {isLogged}); %>
-</header>
+    <header>
+        <%- include('../template/header', {isLogged}); %>
+    </header>
 
-<main>
-    <p>This is index page</p>
-    <p>bienvenue au casino !</p>
-    <p>bla bla classique</p>
+    <main>
 
-    <a href="/slots">Acceder aux machines</a>
+        <div class="img-overlay">
+            <img src="/static/images/slots_machines.jpg" alt="CS Games logo" class="img-cover" />
+            <div class="overlay">
+                <h1 class="test">Bienvenue au casino de l'Atlantide</h1>
+                <p class="test">Découvrez dès maintenant nos machines à sous et tentez de gagner le jackpot!</p>
+                <a type="button" href="/slots" class="btn-atlantis btn  btn-block">Acceder aux machines</a>
+            </div>
+        </div>
 
+        <div class="section">
+            <h1 class="section-title">L'histoire du casino</h1>
+            <div class="section-content">
+                <p>bla bla classique</p>
+            </div>
+        </div>
 
-    <p>les derniers avis</p>
-    <%- include('../template/reviews', {reviews}); %>
+        <div class="section">
+            <h1 class="section-title">Ils parlent de nous</h1>
+            <div class="section-content">
+                <%- include('../template/reviews', {reviews}); %>
+            </div>
+        </div>
 
-</main>
+        <div class="section">
+            <h1 class="section-title">Nos partenaires</h1>
+            <div class="section-content">
+                <p>bla bla classique</p>
+            </div>
+        </div>
 
-<footer>
-  <%- include('../template/footer'); %>
-</footer>
+    </main>
+
+    <footer>
+        <%- include('../template/footer'); %>
+    </footer>
 
 </body>
+
+
+
 </html>
