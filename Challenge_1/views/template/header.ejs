@@ -1,30 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Casino atlantis</a>
+<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light">
 
-  <% if(!isLogged) { %>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/register">Register</a>
-      </li>
-    </ul>
-    <% } else{ %>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="/profile">photo</a>
-        </li>
+    <div class="container-fluid">
 
-        <li class="nav-item">
-          <p>pseudo</p>
-        </li>
+        <a class="navbar-brand" href="/">
+            <img src="/static/images/logo_csgames.png" alt="CS Games logo" width="41" height="50" />
+            Casino atlantis
+        </a>
 
-        <li class="nav-item">
-          <a id="disconnectButton" type="button" href="/logout" class="btn btn-primary btn-block mb-4">Logout</a>
-        </li>
-      </ul>
-      <% } %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse justify-content-end align-items-center" id="collapse">
 
+            <% if(!isLogged) { %>
+            <ul class="navbar-nav text-end">
+                <li class="nav-item">
+                    <a class="btn-atlantis nav-link btn btn-block" href="/login">Login</a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="btn-atlantis nav-link btn btn-block" href="/register">Register</a>
+                </li>
+            </ul>
+            <% } else{ %>
+            <ul class="navbar-nav text-end">
+                <li class="nav-item">
 
-</nav>
+                    <a class="nav-link" href="/profile">
+                        <img src="/static/images/logo_csgames.png" alt="CS Games logo" width="41" height="50" />
+                        pseudo
+                    </a>
+                </li>
+
+                <li class="nav-item ms-2">
+                    <a id="disconnectButton" type="button" href="/logout" class="btn-atlantis nav-link btn  btn-block">Logout</a>
+                </li>
+            </ul>
+            <% } %>
+        </div>
+    </div>

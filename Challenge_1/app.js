@@ -25,6 +25,7 @@ app.get("/online", (req, res, next) => {
 });
 
 app.use("/public", express.static("./public"));
+app.use("/static", express.static("./static"));
 app.use("/api", cookie, apiRoutes);
 app.use("/", cookie, frontRoutes);
 

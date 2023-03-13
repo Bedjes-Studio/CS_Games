@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include('../template/head'); %>
+    <%- include('../template/head'); %>
 </head>
+
 <body class="container">
 
-<header>
-  <%- include('../template/header', {isLogged}); %>
-</header>
+    <header>
+        <%- include('../template/header', {isLogged}); %>
+    </header>
 
-<main>
-    <p>This is game page</p>
-</main>
+    <main>
+        <p>This is game page</p>
+        <p>Slot id is <%- slotId %> </p>
 
-<footer>
-  <%- include('../template/footer'); %>
-</footer>
+        <script>
+            // TODO add play game
+            </script>
+    </main>
+
+    <footer>
+        <%- include('../template/footer'); %>
+    </footer>
 
 </body>
+
 </html>

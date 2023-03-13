@@ -28,15 +28,18 @@ router.get("/slots/", (req, res, next) => {
     });
 });
 
+// TODO still using ?
 router.get("/slot/manage", (req, res, next) => {
     res.render("page/manage", {
         isLogged: req.auth.isLogged,
     });
 });
 
+// TODO : check if id is valid
 router.get("/slot/:id", (req, res, next) => {
     res.render("page/game", {
         isLogged: req.auth.isLogged,
+        slotId: req.params.id,
     });
 });
 
