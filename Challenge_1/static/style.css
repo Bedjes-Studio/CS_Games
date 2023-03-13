@@ -23,6 +23,7 @@ body {
 footer {
     background-color: #432e2e;
     margin-top: 20px;
+    padding: 10px;
 }
 
 #main-navbar {
@@ -32,11 +33,19 @@ footer {
 
 .btn-atlantis {
     background-color: #c5e1e4;
+    max-width: 120px;
+    margin: 5px 0px 5px auto;
 }
 
 .user-picture {
     width: 50px;
     height: 50px;
+    border-radius: 50%;
+}
+
+.profile-picture {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
 }
 
@@ -94,4 +103,35 @@ footer {
 
 .user-data-highlight {
     color: var(--user-data-highlight);
+}
+
+.pre-selector {
+    margin-top: 30px;
+    border-radius: 20px;
+    background-color: #0e467e;
+}
+
+.pre-button {
+    padding: 10px;
+    color: white;
+}
+
+.pre-button:hover {
+    color: #69c1cd;
+}
+
+.pre-button-highlight {
+    background-color: #077eb2;
+}
+
+#pre-button-left {
+    border-radius: 20px 0 0 20px;
+}
+
+#pre-button-center {
+    border-radius: 0;
+}
+
+#pre-button-right {
+    border-radius: 0 20px 20px 0;
 }

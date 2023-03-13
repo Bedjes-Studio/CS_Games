@@ -2,158 +2,109 @@
 <html lang="en">
 
 <head>
-  <%- include('../template/head'); %>
+    <%- include('../template/head'); %>
 </head>
 
 <body class="container">
 
-  <header>
-    <%- include('../template/header', {isLogged}); %>
-  </header>
+    <header>
+        <%- include('../template/header', {isLogged}); %>
+    </header>
 
-  <main>
-    
-    <div class="section">
-      <h1 class="section-title">Mon profil</h1>
-      <div class="section-content">
-          <div class="d-flex flex-wrap">
+    <main>
 
-              <div class="d-flex flex-column me-3">
-                  <img src="/public/<%-picture%>" alt="Profile picture" width="200" height="200">
-                  <label type="button" for="myfile" class="mt-2 btn-atlantis btn btn-block">Choisir une photo</label>
-                  <input type="file" id="myfile" name="myfile" class="d-none">
-              </div>
+        <div class="section">
+            <h1 class="section-title">Mon profil</h1>
+            <div class="section-content">
+                <div class="d-flex flex-wrap">
 
-              <div class="d-flex flex-column ms-3">
-                  <p><span class="user-data-highlight">Identité :</span> <%-identity %></p>
-                  <p><span class="user-data-highlight">Nom d'utilisateur :</span> <%-username%></p>
-                  <p><span class="user-data-highlight">Adresse email :</span> <%-email%></p>
-                  <p><span class="user-data-highlight">Inscrit depuis le :</span> <%-inscription.getDate() %> / <%-inscription.getMonth() %> / <%-inscription.getFullYear() %></p>
-                  <p><span class="user-data-highlight">Status Prenium :</span> <%-prenium%></p>
-              </div>
-          </div>
-      </div>
-  </div>
+                    <div class="d-flex flex-column me-3">
+                        <img class="profile-picture" src="/public/<%-picture%>" alt="Profile picture">
+                        <label type="button" for="myfile" class="mt-2 btn-atlantis btn btn-block">Choisir une photo</label>
+                        <input type="file" id="myfile" name="myfile" class="d-none">
+                    </div>
 
-    <a class="nav-link" href="/profile?pre=whales">whales</a>
-    <a class="nav-link" href="/profile?pre=slots">slots</a>
-    <a class="nav-link" href="/profile?pre=shifts">shifts</a>
-
-    <p>my username</p>
-    <p>my prenium status</p>
-    <% if (locals.pre ) { %>
-    <% if (pre=="slots" ) { %>
-    <p>PRE IS SLOTS</p>
-    <% } %>
-
-    <% if (pre=="whales" ) { %>
-    <p>PRE IS whales</p>
-    <% } %>
-
-    <% if (pre=="shifts" ) { %>
-    <p>PRE IS shifts</p>
-
-    <% if (locals.data && data.length >0 ) { %>
-    <table id="customer_data" class="table table-bordered">
-      <thead>
-        <tr>
-
-          <% Object.keys(data[0]).forEach(key => { %>
-          <th>De <%-key %></th>
-          <% }) %>
-        </tr>
-      </thead>
-      <tbody>
-        <% data.forEach(row => { %>
-        <tr>
-          <% Object.values(row).forEach(key => { %>
-          <th><%-key %></th>
-          <% }) %>
-        </tr>
-
-        <% }) %>
-      </tbody>
-    </table>
-    <% } %>
-    <% } %>
-    <% } %>
-
-    <p>Reviews ! See by our team</p>
-
-    <form>
-      <!-- Review input -->
-      <div class="form-outline mb-4">
-        <input id="reviewInput" type="text" class="form-control" />
-        <label class="form-label" for="usernameInput">Email address</label>
-      </div>
-
-      <!-- Submit button -->
-      <button id="sumitButton" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
-
-      <p id="confirmMessage">
-      </p>
-    </form>
-
-    <script>
-      // # piture change
-      $("#myfile").change(function() {
-        alert("A file has been selected.");
-        // fetch 
-        // https://stackoverflow.com/questions/48284011/how-to-post-image-with-fetch
-        const fileInput = document.querySelector('#myfile');
-        const formData = new FormData();
-
-        formData.append('picture', fileInput.files[0]);
-
-        const options = {
-          method: 'POST',
-          body: formData,
-        };
-
-        fetch('/api/user/updatePicture', options);
-      });
+                    <div class="d-flex flex-column ms-3">
+                        <p><span class="user-data-highlight">Identité :</span> <%-identity %></p>
+                        <p><span class="user-data-highlight">Nom d'utilisateur :</span> <%-username%></p>
+                        <p><span class="user-data-highlight">Adresse email :</span> <%-email%></p>
+                        <p><span class="user-data-highlight">Inscrit depuis le :</span> <%-inscription.getDate() %> / <%-inscription.getMonth() %> / <%-inscription.getFullYear() %></p>
+                        <p><span class="user-data-highlight">Status Prenium :</span> <%-prenium%></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
-      // # profile managment
-      const form = {
-        review: $("#reviewInput"),
-        submit: $("#sumitButton"),
-        messages: $("#confirmMessage"),
+        <div class="pre-selector  d-flex justify-content-center">
+            <a id="pre-button-left" class="pre-button flex-fill btn btn-block text-center" href="/profile?pre=whales">whales</a>
+            <a id="pre-button-center" class="pre-button flex-fill btn btn-block text-center" href="/profile?pre=slots">slots</a>
+            <a id="pre-button-right" class="pre-button flex-fill btn btn-block text-center" href="/profile?pre=shifts">shifts</a>
+        </div>
 
-      };
+        <% if (pre=="whales" ) { %>
+        <script>
+            $("#pre-button-left").addClass("pre-button-highlight");
+        </script>
+        <div class="section">
+            <h1 class="section-title">Clients VIP</h1>
+            <div class="section-content">
+                <%- include('../template/table', {data}); %>
+            </div>
+        </div>
+        <% } %>
 
-      let button = form.submit.click(() => {
-        const login = "/api/user/review";
+        <% if (pre=="slots" ) { %>
+        <script>
+            $("#pre-button-center").addClass("pre-button-highlight");
+        </script>
+        <div class="section">
+            <h1 class="section-title">Machines</h1>
+            <div class="section-content">
+                <%- include('../template/table', {data}); %>
+            </div>
+        </div>
+        <% } %>
 
-        fetch(login, {
-            method: "POST",
-            headers: {
-              Accept: "application/json, text/plain, */*",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              review: form.review.val(),
-            }),
-          })
-          .then((response) => {
-            if (response.status == 200) {
-              form.messages.text('merci!');
-            } else {
-              // form.messages.text(res.body.message);
-              form.messages.text('error');
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
-    </script>
-  </main>
 
-  <footer>
-    <%- include('../template/footer'); %>
-  </footer>
+        <% if (pre=="shifts" ) { %>
+        <script>
+            $("#pre-button-right").addClass("pre-button-highlight");
+        </script>
+        <div class="section">
+            <h1 class="section-title">Mes horaires</h1>
+            <div class="section-content">
+                <%- include('../template/table', {data}); %>
+            </div>
+        </div>
+
+        <% } %>
+
+        <script>
+            // # piture change
+            $("#myfile").change(function() {
+                alert("A file has been selected.");
+                // fetch 
+                // https://stackoverflow.com/questions/48284011/how-to-post-image-with-fetch
+                const fileInput = document.querySelector('#myfile');
+                const formData = new FormData();
+
+                formData.append('picture', fileInput.files[0]);
+
+                const options = {
+                    method: 'POST',
+                    body: formData,
+                };
+
+                fetch('/api/user/updatePicture', options);
+            });
+        </script>
+    </main>
+
+    <footer>
+        <%- include('../template/footer'); %>
+    </footer>
 
 </body>
 

@@ -38,16 +38,17 @@ function displayAdminProfile(req, res) {
 
     switch (pre) {
         case "whales":
+            db.query(
+                "SELECT firstName, lastName, balance FROM users WHERE balance >= 1000000",
+                (error, results, fields) => {
+                    renderWithPRE(req, res, results);
+                }
+            );
+            break;
+
         case "slots":
-            res.render("page/dealerProfile", {
-                isLogged: req.auth.isLogged,
-                identity: req.auth.firstName + " " + req.auth.lastName.toUpperCase(),
-                username: req.auth.username,
-                email: req.auth.email,
-                inscription: req.auth.inscription,
-                prenium: "Non",
-                picture: req.auth.picture,
-                pre: pre,
+            db.query("SELECT * FROM slots", (error, results, fields) => {
+                renderWithPRE(req, res, results);
             });
             break;
 
@@ -62,19 +63,11 @@ function displayAdminProfile(req, res) {
             // TODO : check sql errors !!!
             db.query(query, (error, results, fields) => {
                 console.log(error);
+                if (error) {
+                    res.status(500).json({ error: err });
+                }
                 console.log(results);
-        
-                res.render("page/dealerProfile", {
-                    isLogged: req.auth.isLogged,
-                    identity: req.auth.firstName + " " + req.auth.lastName.toUpperCase(),
-                    username: req.auth.username,
-                    email: req.auth.email,
-                    inscription: req.auth.inscription,
-                    prenium: "Non",
-                    picture: req.auth.picture,
-                    pre: pre,
-                    data: results,
-                });
+                renderWithPRE(req, res, results);
             });
     }
 }
@@ -89,4 +82,18 @@ function checkWeek(res, week) {
     if (!week) {
         res.redirect("/profile?pre=shifts&week=1");
     }
+}
+
+function renderWithPRE(req, res, results) {
+    res.render("page/dealerProfile", {
+        isLogged: req.auth.isLogged,
+        identity: req.auth.firstName + " " + req.auth.lastName.toUpperCase(),
+        username: req.auth.username,
+        email: req.auth.email,
+        inscription: req.auth.inscription,
+        prenium: "Oui",
+        picture: req.auth.picture,
+        pre: req.query.pre,
+        data: results,
+    });
 }
