@@ -6,8 +6,8 @@ const frontCtrl = require("../controllers/front");
 
 router.get("/profile", frontCtrl.profile);
 
-router.get("/prenium", (req, res, next) => {
-    res.render("page/prenium", {
+router.get("/premium", (req, res, next) => {
+    res.render("page/premium", {
         isLogged: req.auth.isLogged,
         username: req.auth.username,
         picture: req.auth.picture,
@@ -44,6 +44,8 @@ router.get("/", frontCtrl.index);
 router.use("*", (req, res, next) => {
     res.status(404).render("page/404", {
         isLogged: req.auth.isLogged,
+        username: req.auth.username,
+        picture: req.auth.picture,
     });
 });
 

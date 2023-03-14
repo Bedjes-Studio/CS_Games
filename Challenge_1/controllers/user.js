@@ -87,7 +87,7 @@ exports.review = (req, res, next) => {
 
 // Injection with filename possible, care about destroing server files ?
 exports.updatePicture = (req, res, next) => {
-    // TODO : add prenium status
+    // TODO : add premium status
     if (req.auth.isLogged) {
         const tempPath = req.file.path;
         const targetPath = path.join(__dirname, "../public/", req.file.originalname);

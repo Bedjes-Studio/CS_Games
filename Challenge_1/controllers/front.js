@@ -37,7 +37,7 @@ function displayClientProfile(req, res) {
         username: req.auth.username,
         email: req.auth.email,
         inscription: req.auth.inscription,
-        prenium: "Non",
+        premium: "Non",
         picture: req.auth.picture,
     });
 }
@@ -102,7 +102,7 @@ function renderWithPRE(req, res, results) {
         username: req.auth.username,
         email: req.auth.email,
         inscription: req.auth.inscription,
-        prenium: "Oui",
+        premium: "Oui",
         picture: req.auth.picture,
         pre: req.query.pre,
         data: results,

@@ -1,3 +1,5 @@
+/* Fonts */
+
 @font-face {
     font-family: "Montserrat";
     src: url("font/Montserrat/Montserrat-Regular.ttf");
@@ -7,6 +9,8 @@
     font-family: "RobotoMono";
     src: url("font/Roboto_Mono/RobotoMono-Regular.ttf");
 }
+
+/* Global */
 
 :root {
     --main_font: "Montserrat";
@@ -26,6 +30,28 @@ footer {
     padding: 10px;
 }
 
+/* Section template */
+
+.section {
+    margin-top: 30px;
+    color: white;
+}
+
+.section-title {
+    background-color: #0e467e;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+}
+.section-content {
+    background-color: #077eb2;
+    padding: 10px;
+    border-radius: 0 0 20px 20px;
+}
+
+/* Nav header */
+
 #main-navbar {
     background-color: #71ccd7;
     border-radius: 20px;
@@ -40,17 +66,14 @@ footer {
     margin: 5px 0px 5px auto;
 }
 
+/* Profile page */
 .user-picture {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-.profile-picture {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
+/* Index page */
 
 .img-overlay {
     margin-top: 30px;
@@ -90,22 +113,12 @@ footer {
     min-width: 25%;
 }
 
-.section {
-    margin-top: 30px;
-    color: white;
-}
+/* Profile page */
 
-.section-title {
-    background-color: #0e467e;
-    margin-bottom: 0;
-    text-align: center;
-    padding: 10px;
-    border-radius: 20px 20px 0 0;
-}
-.section-content {
-    background-color: #077eb2;
-    padding: 10px;
-    border-radius: 0 0 20px 20px;
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
 }
 
 .user-data-highlight {
@@ -141,4 +154,11 @@ footer {
 
 #pre-button-right {
     border-radius: 0 20px 20px 0;
+}
+
+/* Premium page */
+
+.premium-text {
+    margin-top: 10px;
+    margin-left: 10px;
 }
