@@ -3,8 +3,6 @@ const db = require("../db");
 exports.index = (req, res, next) => {
     db.query("SELECT public_id FROM slots", function (error, results, fields) {
         slot_id = results[Math.floor(Math.random() * results.length)].public_id;
-        console.log(results);
-        console.log(slot_id);
         db.query("SELECT * FROM reviews", function (error, results, fields) {
             res.render("page/index", {
                 isLogged: req.auth.isLogged,

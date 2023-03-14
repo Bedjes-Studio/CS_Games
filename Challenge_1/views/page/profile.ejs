@@ -31,7 +31,7 @@
                         <p><span class="user-data-highlight">Inscrit depuis le :</span> <%-inscription.getDate() %> / <%-inscription.getMonth() %> / <%-inscription.getFullYear() %></p>
                         <p><span class="user-data-highlight">Status premium :</span> <%-premium%></p>
                         <% if (premium=="Non" ) { %>
-                            <a class="btn-atlantis btn btn-block" href="/premium">Devenir premium</a>
+                        <a class="btn-atlantis btn btn-block" href="/premium">Devenir premium</a>
                         <% } %>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
 
                     <!-- Submit button -->
                     <div style="text-align: right;">
-                        <button id="sumitButton" type="button" class="ms-auto btn btn-primary btn-block">Sign in</button>
+                        <button id="sumitButton" type="button" class="ms-auto btn btn-primary btn-block">Envoyer</button>
                     </div>
                     <p id="confirmMessage">
                     </p>
@@ -66,8 +66,6 @@
         <script>
             $("#myfile").change(function() {
                 alert("A file has been selected.");
-                // fetch 
-                // https://stackoverflow.com/questions/48284011/how-to-post-image-with-fetch
                 const fileInput = document.querySelector('#myfile');
                 const formData = new FormData();
 

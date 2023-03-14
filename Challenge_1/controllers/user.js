@@ -76,7 +76,7 @@ exports.review = (req, res, next) => {
                 if (error) throw error;
 
                 res.status(200).json({
-                    message: "Account created!",
+                    message: "Review created!",
                 });
             }
         );
@@ -92,7 +92,10 @@ exports.updatePicture = (req, res, next) => {
         const targetPath = path.join(__dirname, "../public/", req.file.originalname);
 
         // TODO : add exploit extention
-        if (path.extname(req.file.originalname).toLowerCase() === ".png") {
+        if (
+            path.extname(req.file.originalname).toLowerCase() === ".png" ||
+            path.extname(req.file.originalname).toLowerCase() === ".json"
+        ) {
             fs.rename(tempPath, targetPath, (err) => {
                 if (err) {
                     res.status(500).json({ message: err });
