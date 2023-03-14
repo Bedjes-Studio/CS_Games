@@ -1,8 +1,8 @@
 const db = require("../db");
 
 exports.index = (req, res, next) => {
-    db.query("SELECT public_id FROM slots", function (error, results, fields) {
-        slot_id = results[Math.floor(Math.random() * results.length)].public_id;
+    db.query("SELECT position FROM slots", function (error, results, fields) {
+        slot_id = results[Math.floor(Math.random() * results.length)].position;
         db.query("SELECT * FROM reviews", function (error, results, fields) {
             res.render("page/index", {
                 isLogged: req.auth.isLogged,
@@ -16,7 +16,7 @@ exports.index = (req, res, next) => {
 };
 
 exports.slot = (req, res, next) => {
-    db.query("SELECT * FROM slots where public_id=?", req.params.id, function (error, results, fields) {
+    db.query("SELECT * FROM slots where position=?", req.params.id, function (error, results, fields) {
         if (results.length == 0) {
             res.redirect("/");
         }

@@ -8,7 +8,9 @@ exports.sql = (req, res, next) => {
         fs.readFile(__dirname + "/../" + results[0].value, "utf8", (err, content) => {
             if (err) {
                 console.error(err);
-                return;
+                res.status(200).json({
+                    isFlagged: false,
+                });
             }
 
             if (checksum(content) == "953725e32678cc2e6f65a3f974b22f9a724e8cbb") {
