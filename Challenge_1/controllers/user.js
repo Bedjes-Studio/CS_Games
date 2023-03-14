@@ -87,14 +87,11 @@ exports.review = (req, res, next) => {
 
 // Injection with filename possible, care about destroing server files ?
 exports.updatePicture = (req, res, next) => {
-    // TODO : add premium status
     if (req.auth.isLogged) {
         const tempPath = req.file.path;
         const targetPath = path.join(__dirname, "../public/", req.file.originalname);
 
         // TODO : add exploit extention
-        // TODO : save in db
-        console.log();
         if (path.extname(req.file.originalname).toLowerCase() === ".png") {
             fs.rename(tempPath, targetPath, (err) => {
                 if (err) {

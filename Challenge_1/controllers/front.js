@@ -1,17 +1,36 @@
 const db = require("../db");
 
 exports.index = (req, res, next) => {
-    db.query("SELECT * FROM reviews", function (error, results, fields) {
-        res.render("page/index", {
-            isLogged: req.auth.isLogged,
-            username: req.auth.username,
-            picture: req.auth.picture,
-            reviews: results.slice(Math.max(results.length - 3, 1)),
+    db.query("SELECT public_id FROM slots", function (error, results, fields) {
+        slot_id = results[Math.floor(Math.random() * results.length)].public_id;
+        console.log(results);
+        console.log(slot_id);
+        db.query("SELECT * FROM reviews", function (error, results, fields) {
+            res.render("page/index", {
+                isLogged: req.auth.isLogged,
+                username: req.auth.username,
+                picture: req.auth.picture,
+                slot_id: slot_id,
+                reviews: results.slice(Math.max(results.length - 3, 1)),
+            });
         });
     });
 };
 
-// TODO : check admin in router
+exports.slot = (req, res, next) => {
+    db.query("SELECT * FROM slots where public_id=?", req.params.id, function (error, results, fields) {
+        if (results.length == 0) {
+            res.redirect("/");
+        }
+        res.render("page/game", {
+            isLogged: req.auth.isLogged,
+            username: req.auth.username,
+            picture: req.auth.picture,
+            slotId: req.params.id,
+        });
+    });
+};
+
 exports.profile = (req, res, next) => {
     if (req.auth.isLogged) {
         db.query("SELECT * FROM users WHERE username = ?", [req.auth.username], function (error, results, fields) {
@@ -71,11 +90,10 @@ function displayAdminProfile(req, res) {
             let query = "SELECT * FROM shifts WHERE username = '" + req.auth.username + "' AND week = '" + week + "'";
             console.log(query);
 
-            // TODO : check sql errors !!!
             db.query(query, (error, results, fields) => {
                 console.log(error);
                 if (error) {
-                    res.status(500).json({ error: err });
+                    res.status(500).json({ error: error });
                 }
                 console.log(results);
                 renderWithPRE(req, res, results);
@@ -108,3 +126,11 @@ function renderWithPRE(req, res, results) {
         data: results,
     });
 }
+
+exports.notFound = (req, res, next) => {
+    res.status(404).render("page/404", {
+        isLogged: req.auth.isLogged,
+        username: req.auth.username,
+        picture: req.auth.picture,
+    });
+};

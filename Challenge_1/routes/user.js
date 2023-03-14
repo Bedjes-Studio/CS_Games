@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const router = express.Router();
 
+const loginFilter = require("../middleware/loginFilter");
+
 const userCtrl = require("../controllers/user");
 
 const upload = multer({
@@ -9,10 +11,9 @@ const upload = multer({
     // you might also want to set some limits: https://github.com/expressjs/multer#limits
 });
 
-// TODO : check login filter
 router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
-router.post("/review", userCtrl.review);
-router.post("/updatePicture", upload.single("picture"), userCtrl.updatePicture);
+router.post("/review", loginFilter, userCtrl.review);
+router.post("/updatePicture", loginFilter, upload.single("picture"), userCtrl.updatePicture);
 
 module.exports = router;

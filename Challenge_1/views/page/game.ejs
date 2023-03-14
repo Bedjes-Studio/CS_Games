@@ -12,12 +12,55 @@
     </header>
 
     <main>
-        <p>This is game page</p>
-        <p>Slot id is <%- slotId %> </p>
+        <div class="section">
+            <h1 class="section-title">Machine n°<%- slotId %></h1>
+            <div class="section-content">
+                <div class="d-flex">
+                    <img class="profile-picture" src="/static/images/game.jpg" alt="Prenium picture">
+                    <div class="premium-text d-flex flex-fill flex-column align-items-center">
+                        <p>Vous approchez de la machine à sous, tentez votre chance pour gagner le jackpot !</p>
+                        <button id="playButton" type="button" class="mt-3 mb-3 btn-overlay btn btn-block">Jouer</button>
+                        <p id="gameResults"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
-            // TODO add play game
-            </script>
+            $("#playButton").click(() => {
+                $("#gameResults").text("");
+                const endpoint = "/api/slot/play/<%= slotId %>";
+
+                fetch(endpoint, {
+                        method: "GET",
+                        headers: {
+                            Accept: "application/json, text/plain, */*",
+                            "Content-Type": "application/json",
+                        }
+                    })
+                    .then((response) => {
+
+                        response.json().then(data => ({
+                                status: response.status,
+                                body: data
+                            }))
+                            .then(res => {
+                                if (res.status == 200) {
+                                    if (res.body.winner == true) {
+                                        $("#gameResults").text("Vous gagnez le jackpot ! Un papier sort également de la machine, il est écrit : " + res.body.flag);
+                                    } else {
+                                        $("#gameResults").text("C'est perdu ! Vous aurez plus de chances la prochaine fois...");
+                                    }
+                                } else {
+                                    $("#gameResults").text("Cette machine ne semble pas fonctionner");
+                                }
+                            });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            });
+        </script>
     </main>
 
     <footer>

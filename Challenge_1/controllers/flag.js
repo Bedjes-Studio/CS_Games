@@ -1,6 +1,6 @@
 const db = require("../db");
 const fs = require("fs");
-const path = require("path");
+const checksum = require("checksum");
 
 // check if injection is ok
 exports.sql = (req, res, next) => {
@@ -10,9 +10,11 @@ exports.sql = (req, res, next) => {
                 console.error(err);
                 return;
             }
-            if (content == "test") {
+
+            if (checksum(content) == "953725e32678cc2e6f65a3f974b22f9a724e8cbb") {
                 res.status(200).json({
                     isFlagged: true,
+                    flag: "flag{#N1ce:PicTure}",
                 });
             } else {
                 res.status(200).json({

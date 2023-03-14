@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
             let decodedToken = jwt.verify(token, config.server.key);
             let username = decodedToken.username;
             let isAdmin = false;
-            // TODO store admin param in token
+            // TODO : choose admin account
             if (username == "bob") {
                 isAdmin = true;
             }
