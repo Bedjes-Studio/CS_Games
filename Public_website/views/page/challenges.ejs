@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../template/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../template/header', {isLogged}); %>
+    </header>
+
+    <main>
+        <div class="section">
+            <h1 class="section-title">Découvrez l'expérience premium</h1>
+            <div class="section-content">
+                <div class="d-flex">
+                    <img class="profile-picture" src="/static/images/premium.jpg" alt="Prenium picture">
+                    <p class="premium-text">L'expérience premium arrive très bientot ! <br /> <br />
+                        En tant que membre premium, vous aurez accès en avant première à tous nos futurs jeux,
+                        des sessions uniquements disponible aux membres premium et votre nom inscrit sur la page dédiée.
+                        <br />
+                        Une fois membre premium vous le restez à vie ! <br /><br />
+                        Vous serez contacté dès que cette option sera possible.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../template/footer'); %>
+    </footer>
+
+</body>
+
+</html>

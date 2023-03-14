@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../template/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../template/header', {isLogged}); %>
+    </header>
+
+    <main>
+
+        <div class="img-overlay">
+            <img src="/static/images/slots_machines.jpg" alt="CS Games logo" class="img-cover" />
+            <div class="overlay">
+                <h1 class="test">Bienvenue au casino de l'Atlantide</h1>
+                <p class="test">Découvrez dès maintenant nos machines à sous et tentez de gagner le jackpot!</p>
+                <a type="button" href="/slots/<%-slot_id%>" class="btn-overlay btn btn-block">Acceder aux machines</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h1 class="section-title">L'histoire du casino</h1>
+            <div class="section-content">
+                <p>bla bla classique</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h1 class="section-title">Ils parlent de nous</h1>
+            <div class="section-content">
+                <%- include('../template/reviews', {reviews}); %>
+            </div>
+        </div>
+
+        <div class="section">
+            <h1 class="section-title">Nos partenaires</h1>
+            <div class="section-content">
+                <p>bla bla classique</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../template/footer'); %>
+    </footer>
+
+</body>
+
+
+
+</html>

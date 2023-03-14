@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between flex-wrap">
+
+    <% reviews.forEach(review => { %>
+    <div class="review-container d-flex">
+        <img src="/static/images/logo_csgames.png" alt="CS Games logo" class="mb-auto" width="100px" height="auto" />
+        <div class="d-flex flex-column">
+            <h3 class="mt-2"><%-review.username %></h3>
+            <p><%-review.text %></p>
+            <p class="mt-auto">le <%-review.date.getDate() %> / <%-review.date.getMonth() %> / <%-review.date.getFullYear() %></p>
+        </div>
+    </div>
+    <% }) %>
+
+</div>

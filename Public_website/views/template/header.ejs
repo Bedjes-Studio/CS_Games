@@ -1,0 +1,39 @@
+<nav id="main-navbar" class="navbar navbar-expand-lg navbar-light">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="/">
+            <img src="/static/images/logo_csgames.png" alt="CS Games logo" width="41" height="50" />
+            Casino atlantis
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse justify-content-end align-items-center" id="collapse">
+
+            <% if(!isLogged) { %>
+            <ul class="navbar-nav text-end">
+                <li class="nav-item">
+                    <a class="btn-atlantis btn-nav nav-link btn btn-block" href="/login">Login</a>
+                </li>
+            </ul>
+            <% } else{ %>
+            <ul class="navbar-nav text-end">
+                <li class="nav-item">
+
+                    <a class="nav-link" href="/profile">
+                        <img src="/public/<%-picture%>" class="user-picture" alt="User profile picture" />
+                        <%-username%>
+                    </a>
+                </li>
+
+                <li class="nav-item ms-2 my-auto">
+                    <div>
+                        <a id="disconnectButton" type="button" href="/logout" class=" btn-atlantis btn-nav nav-link btn  btn-block">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            <% } %>
+        </div>
+    </div>
