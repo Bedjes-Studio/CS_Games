@@ -1,19 +1,14 @@
+const { computeRanking } = require("../controllers/flag");
 
 exports.index = (req, res, next) => {
-    // db.query("SELECT position FROM slots", function (error, results, fields) {
-    //     slot_id = results[Math.floor(Math.random() * results.length)].position;
-    //     db.query("SELECT * FROM reviews", function (error, results, fields) {
-    //         res.render("page/index", {
-    //             isLogged: req.auth.isLogged,
-    //             username: req.auth.username,
-    //             picture: req.auth.picture,
-    //             slot_id: slot_id,
-    //             reviews: results.slice(Math.max(results.length - 3, 1)),
-    //         });
-    //     });
-    // });
+    computeRanking().then((ranking) => {
+        res.render("page/index", {
+            isLogged: req.auth.isLogged,
+            username: req.auth.username,
+            ranking: ranking,
+        });
+    });
 };
-
 
 exports.challenges = (req, res, next) => {
     if (req.auth.isLogged) {

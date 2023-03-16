@@ -75,13 +75,9 @@ const updateFlaggedList = function (username, challengeId) {
 };
 
 exports.scores = (req, res, next) => {
-    User.find()
-        .then((users) => {
-            results = [];
-            users.forEach((user) => {
-                results.push({ username: user.username, score: user.score });
-            });
-            res.status(200).json({ results });
+    computeRanking()
+        .then((ranking) => {
+            res.status(200).json({ ranking });
         })
         .catch((error) => {
             res.status(400).json({
@@ -89,6 +85,25 @@ exports.scores = (req, res, next) => {
             });
         });
 };
+
+const computeRanking = function (username, challengeId) {
+    return new Promise(function (resolve, reject) {
+        User.find()
+            .sort({ score: -1 })
+            .then((users) => {
+                ranking = [];
+                users.forEach((user) => {
+                    ranking.push({ Équipe: user.username, Score: user.score });
+                });
+                resolve(ranking);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+};
+
+exports.computeRanking = computeRanking;
 
 exports.challenges = (req, res, next) => {
     Challenge.find()

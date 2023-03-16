@@ -16,33 +16,18 @@
         <div class="img-overlay">
             <img src="/static/images/slots_machines.jpg" alt="CS Games logo" class="img-cover" />
             <div class="overlay">
-                <h1 class="test">Bienvenue au casino de l'Atlantide</h1>
-                <p class="test">Découvrez dès maintenant nos machines à sous et tentez de gagner le jackpot!</p>
-                <a type="button" href="/slots/<%-slot_id%>" class="btn-overlay btn btn-block">Acceder aux machines</a>
+                <h1 class="test">Bienvenue au CTF des CS Games</h1>
+                <p class="test">Suivez le classement en direct sur cette page et tentez de relevez les défis !</p>
+                <a type="button" href="/challenges" class="btn-overlay btn btn-block">Acceder aux challenges</a>
             </div>
         </div>
 
         <div class="section">
-            <h1 class="section-title">L'histoire du casino</h1>
+            <h1 class="section-title">Classement</h1>
             <div class="section-content">
-                <p>bla bla classique</p>
+                <%- include('../template/ranking', {data: ranking}); %>
             </div>
         </div>
-
-        <div class="section">
-            <h1 class="section-title">Ils parlent de nous</h1>
-            <div class="section-content">
-                <%- include('../template/reviews', {reviews}); %>
-            </div>
-        </div>
-
-        <div class="section">
-            <h1 class="section-title">Nos partenaires</h1>
-            <div class="section-content">
-                <p>bla bla classique</p>
-            </div>
-        </div>
-
     </main>
 
     <footer>

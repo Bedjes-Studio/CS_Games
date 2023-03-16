@@ -2,9 +2,9 @@
 
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand d-flex" href="/">
             <img src="/static/images/logo_csgames.png" alt="CS Games logo" width="41" height="50" />
-            Casino atlantis
+            <p class="ms-2 my-auto">Challenge CTF </p>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,17 +15,19 @@
             <% if(!isLogged) { %>
             <ul class="navbar-nav text-end">
                 <li class="nav-item">
-                    <a class="btn-atlantis btn-nav nav-link btn btn-block" href="/login">Login</a>
+                    <a class="btn-atlantis btn-nav nav-link btn btn-block" href="/login">Se connecter</a>
                 </li>
             </ul>
             <% } else{ %>
             <ul class="navbar-nav text-end">
-                <li class="nav-item">
+                <li class="nav-item me-2 my-auto">
+                    <p class="mb-0">Équipe <%-username%> </p>
+                </li>
 
-                    <a class="nav-link" href="/profile">
-                        <img src="/public/<%-picture%>" class="user-picture" alt="User profile picture" />
-                        <%-username%>
-                    </a>
+                <li class="nav-item ms-2 me-2 my-auto">
+                    <div>
+                        <a type="button" href="/challenges" class="btn-atlantis btn-nav nav-link btn btn-block">Voir les challenges</a>
+                    </div>
                 </li>
 
                 <li class="nav-item ms-2 my-auto">
