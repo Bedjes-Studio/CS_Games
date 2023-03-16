@@ -20,6 +20,9 @@ module.exports = (req, res, next) => {
             };
             next();
         } catch (error) {
+            if (error.name == "TokenExpiredError") {
+                res.clearCookie("AUTH_COOKIE");
+            }
             console.log(error);
             res.status(401).json({ "auth error": error });
         }

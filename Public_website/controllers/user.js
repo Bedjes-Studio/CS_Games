@@ -46,16 +46,22 @@ exports.login = (req, res, next) => {
                         if (!valid) {
                             return res.status(401).json({ error: "Mot de passe incorrect !" });
                         }
+                        token = jwt.sign({ username: req.body.username }, config.server.key, { expiresIn: "24h" });
+                        res.cookie("AUTH_COOKIE", token);
                         res.status(200).json({
-                            userId: user._id,
-                            token: jwt.sign({ userId: user._id }, config.server.key, { expiresIn: "24h" }),
+                            username: req.body.username,
+                            token: token,
                         });
                     })
                     .catch((error) => {
+                        console.log(error);
                         res.status(500).json({ error });
                     });
             })
-            .catch((error) => res.status(500).json({ error }));
+            .catch((error) => {
+                console.log(error);
+                res.status(500).json({ error });
+            });
     } else {
         res.status(401).json({ message: "Please enter Username and Password!" });
     }

@@ -3,5 +3,7 @@ module.exports = (req, res, next) => {
     if (req.auth.isLogged == false) {
         res.redirect("/");
     }
-    next();
+    else {
+        next();
+    }
 };

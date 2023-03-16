@@ -12,9 +12,12 @@ module.exports = (req, res, next) => {
                 isLogged: true,
                 username: username,
             };
+
             next();
         } catch (error) {
-            console.log(error);
+            if (error.name == "TokenExpiredError") {
+                res.clearCookie("AUTH_COOKIE");
+            }
             res.status(401).json({ "auth error": error });
         }
     } else {

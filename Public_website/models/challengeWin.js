@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const challengeWinSchema = mongoose.Schema({
-    userId: { type: String, required: true },
+    username: { type: String, required: true },
     challengeId: { type: String, required: true },
 });
 

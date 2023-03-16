@@ -5,7 +5,8 @@
     "main": "server.js",
     "scripts": {
         "nodemon-dev": "set NODE_ENV=dev && nodemon server.js",
-        "nodemon-prod": "set NODE_ENV=prod && nodemon server.js"
+        "nodemon-prod": "set NODE_ENV=prod && nodemon server.js",
+        "filldb-dev": "set NODE_ENV=dev && node mongodb/filler.js"
     },
     "repository": {
         "type": "git",

@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const hintUsedSchema = mongoose.Schema({
-    userId: { type: String, required: true },
-    hingId: { type: String, required: true },
+    username: { type: String, required: true },
+    challengeId: { type: String, required: true },
+    hintId: { type: String, required: true },
 });
 
 module.exports = mongoose.model("hintUsed", hintUsedSchema);
