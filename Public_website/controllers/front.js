@@ -23,6 +23,11 @@ exports.challenges = (req, res, next) => {
         //         displayAdminProfile(req, res);
         //     }
         // });
+
+        res.render("page/challenges", {
+            isLogged: req.auth.isLogged,
+            username: req.auth.username,
+        });
     } else {
         res.redirect("/");
     }
