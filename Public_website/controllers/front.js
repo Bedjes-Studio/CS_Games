@@ -16,7 +16,7 @@ exports.challenges = (req, res, next) => {
             res.render("page/challenges", {
                 isLogged: req.auth.isLogged,
                 username: req.auth.username,
-                results: results,
+                challenges: results,
             });
         });
     } else {

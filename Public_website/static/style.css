@@ -176,9 +176,13 @@ footer {
     color: white;
 }
 
-.challenge-box:hover{
+.challenge-box:hover {
     background-color: #114e8b;
     color: white;
 }
 
-
+.hint-blox {
+    background-color: #255d95;
+    text-align: left !important;
+    border-radius: 20px;
+}

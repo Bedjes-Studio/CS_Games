@@ -127,8 +127,9 @@ const computeChallenges = function (req, res, next) {
                     hintUsed.forEach((hint) => {
                         hintUsedIds.push(hint.hintId);
                     });
-
+                    // TODO : remove cheat mode
                     Hint.find({ hintId: { $in: hintUsedIds } }).then((hints) => {
+                        // Hint.find().then((hints) => {
                         ChallengeWin.find({ username: req.auth.username }).then((challengeWin) => {
                             results = [];
                             challenges.forEach((challenge) => {
@@ -139,6 +140,7 @@ const computeChallenges = function (req, res, next) {
                                 }
                                 chall = {
                                     name: challenge.name,
+                                    challengeId: challenge.challengeId,
                                     description: challenge.description,
                                     flagValue: challenge.flagValue,
                                     flagged: flagged,
@@ -151,6 +153,9 @@ const computeChallenges = function (req, res, next) {
                                         h = getHintFromId(hintId, hints);
                                         hint.push({ hintId: hintId, description: h.description });
                                     } else {
+                                        // TODO cheat mode
+                                        // h = getHintFromId(hintId, hints);
+                                        // hint.push({ hintId: hintId, description: h.description });
                                         hint.push({ hintId: hintId, description: "" });
                                     }
                                 });
@@ -189,3 +194,34 @@ function getHintFromId(hintId, hints) {
     }
     return undefined;
 }
+
+exports.useHint = (req, res, next) => {
+    HintUsed.find({ hintId: req.params.id, username: req.auth.username }).then((hintUsed) => {
+        if (hintUsed.length == 0) {
+            Hint.find({ hintId: req.params.id }).then((hint) => {
+                if (!hint) {
+                    return res.status(401).json({ message: "Indice non trouvé !" });
+                }
+            });
+
+            const hintUsed = new HintUsed({
+                username: req.auth.username,
+                challengeId: req.params.id.slice(0, -2),
+                hintId: req.params.id,
+            });
+
+            hintUsed
+                .save()
+                .then(() => {
+                    res.redirect("/challenges");
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        error: error,
+                    });
+                });
+        } else {
+            res.redirect("/challenges");
+        }
+    });
+};
