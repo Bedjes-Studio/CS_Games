@@ -12,30 +12,46 @@ exports.check = (req, res, next) => {
             }
 
             if (challenge.flag == req.body.flag) {
-                computeScore(req.auth.username, challenge.challengeId, challenge.flagValue)
-                    .then((points) => updateScores(req.auth.username, points))
-                    .then(() => updateFlaggedList(req.auth.username, challenge.challengeId))
-                    .then(() => res.status(200).json({ message: "C'est le bon flag !", flagged: true }))
-                    .catch((error) => {
-                        console.log(error);
-                        res.status(500).json({ error, flagged: false });
-                    });
+                ChallengeWin.findOne({ challengeId: req.body.challengeId, username: req.auth.username }).then((everFlagged) => {
+                    if (!everFlagged) {
+                        computeScore(req.auth.username, challenge.challengeId, challenge.flagValue)
+                            .then((points) => updateScores(req.auth.username, points))
+                            .then(() => updateFlaggedList(req.auth.username, challenge.challengeId))
+                            .then(() => {
+                                console.log("WTF");
+                                res.status(200).json({ message: "C'est le bon flag !", flagged: true });
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                res.status(500).json({ error, flagged: false });
+                            });
+                    } else {
+                        res.status(200).json({ message: "Flag déjà utilisé", flagged: true });
+                    }
+                });
             } else {
                 res.status(200).json({ message: "Ce n'est pas le bon flag !", flagged: false });
             }
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json({ error });
+        });
 };
 
 const computeScore = function (username, challengeId, initialValue) {
     return new Promise(function (resolve, reject) {
-        HintUsed.find({ username: username, challengeId: challengeId }).then((hintUsed) => {
-            if (!hintUsed) {
-                resolve(initialValue);
-            } else {
-                resolve(initialValue - initialValue * 0.15 * hintUsed.length);
-            }
-        });
+        HintUsed.find({ username: username, challengeId: challengeId })
+            .then((hintUsed) => {
+                if (!hintUsed) {
+                    resolve(initialValue);
+                } else {
+                    resolve(initialValue - initialValue * 0.15 * hintUsed.length);
+                }
+            })
+            .catch((error) => {
+                reject(error);
+            });
     });
 };
 
@@ -48,9 +64,7 @@ const updateScores = function (username, points) {
                 resolve();
             })
             .catch((error) => {
-                res.status(400).json({
-                    error: error,
-                });
+                reject(error);
             });
     });
 };
@@ -68,8 +82,7 @@ const updateFlaggedList = function (username, challengeId) {
                 resolve();
             })
             .catch((error) => {
-                console.log(error);
-                res.status(500).json({ error });
+                reject(error);
             });
     });
 };
@@ -105,37 +118,61 @@ const computeRanking = function (username, challengeId) {
 
 exports.computeRanking = computeRanking;
 
-exports.challenges = (req, res, next) => {
-    Challenge.find()
-        .then((challenges) => {
-            HintUsed.find({ username: req.auth.username }).then((hintUsed) => {
-                console.log(hintUsed);
-                hintUsedIds = [];
-                hintUsed.forEach((hint) => {
-                    hintUsedIds.push(hint.hintId);
-                });
-
-                Hint.find({ hintId: { $in: hintUsedIds } }).then((hints) => {
-                    console.log(hints);
-                    results = [];
-                    challenges.forEach((challenge) => {
-                        chall = { name: challenge.name, description: challenge.description, flagValue: challenge.flagValue };
-                        hint = [];
-
-                        challenge.hintId.forEach((hintId) => {
-                            // search if int is used and add it
-                            if (hintUsedIds.includes(hintId)) {
-                                h = getHintFromId(hintId, hints);
-                                hint.push({ hintId: hintId, description: h.description });
-                            } else {
-                                hint.push({ hintId: hintId, description: "" });
-                            }
-                        });
-                        results.push({ challenge: chall, hint: hint });
+const computeChallenges = function (req, res, next) {
+    return new Promise(function (resolve, reject) {
+        Challenge.find()
+            .then((challenges) => {
+                HintUsed.find({ username: req.auth.username }).then((hintUsed) => {
+                    hintUsedIds = [];
+                    hintUsed.forEach((hint) => {
+                        hintUsedIds.push(hint.hintId);
                     });
-                    res.status(200).json({ results });
+
+                    Hint.find({ hintId: { $in: hintUsedIds } }).then((hints) => {
+                        ChallengeWin.find({ username: req.auth.username }).then((challengeWin) => {
+                            results = [];
+                            challenges.forEach((challenge) => {
+                                flagged = false;
+
+                                if (challengeWin.includes(challenge.challengeId)) {
+                                    flagged = true;
+                                }
+                                chall = {
+                                    name: challenge.name,
+                                    description: challenge.description,
+                                    flagValue: challenge.flagValue,
+                                    flagged: flagged,
+                                };
+                                hint = [];
+
+                                challenge.hintId.forEach((hintId) => {
+                                    // search if int is used and add it
+                                    if (hintUsedIds.includes(hintId)) {
+                                        h = getHintFromId(hintId, hints);
+                                        hint.push({ hintId: hintId, description: h.description });
+                                    } else {
+                                        hint.push({ hintId: hintId, description: "" });
+                                    }
+                                });
+                                results.push({ challenge: chall, hint: hint });
+                            });
+                            resolve(results);
+                        });
+                    });
                 });
+            })
+            .catch((error) => {
+                reject(error);
             });
+    });
+};
+
+exports.computeChallenges = computeChallenges;
+
+exports.challenges = (req, res, next) => {
+    computeChallenges(req, res, next)
+        .then((results) => {
+            res.status(200).json({ results });
         })
         .catch((error) => {
             res.status(400).json({

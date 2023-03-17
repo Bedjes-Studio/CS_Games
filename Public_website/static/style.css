@@ -172,6 +172,13 @@ footer {
 .challenge-box {
     background-color: #0e467e;
     text-align: center;
+    border-radius: 20px;
+    color: white;
+}
+
+.challenge-box:hover{
+    background-color: #114e8b;
+    color: white;
 }
 
 
