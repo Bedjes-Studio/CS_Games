@@ -6,9 +6,9 @@ const challenges = [
     { flagValue: "175", challengeId: "1-2", hintId: ["1-2-1", "1-2-2"], flag: "flag{#N1ce:PicTure}" },
     { flagValue: "175", challengeId: "1-3", hintId: ["1-3-1", "1-3-2"], flag: "flag{WP_D@ny!}" },
 
-    { flagValue: "100", challengeId: "2-1", hintId: ["1-3-1", "1-3-2"], flag: "flag{}" },
-    { flagValue: "150", challengeId: "2-2", hintId: ["1-3-1", "1-3-2"], flag: "flag{}" },
-    { flagValue: "150", challengeId: "2-3", hintId: ["1-3-1", "1-3-2"], flag: "flag{}" },
+    { flagValue: "100", challengeId: "2-1", hintId: ["1-3-1", "1-3-2"], flag: "flag{aaaaaaaaaaaaaaaaaaaaaaaaaaaa}" },
+    { flagValue: "150", challengeId: "2-2", hintId: ["1-3-1", "1-3-2"], flag: "flag{aaaaaaaaaaaaaaaaaaaaaaaaaaaa}" },
+    { flagValue: "150", challengeId: "2-3", hintId: ["1-3-1", "1-3-2"], flag: "flag{aaaaaaaaaaaaaaaaaaaaaaaaaaaa}" },
 
     { flagValue: "100", challengeId: "3-1", hintId: ["3-1-1", "3-1-2"], flag: "flag{fenetres8BC}" },
     {
