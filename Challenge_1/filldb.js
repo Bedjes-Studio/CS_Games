@@ -119,15 +119,15 @@ const slotsValues = [
 
 function rebuildDB() {
     return new Promise(function (resolve, reject) {
-        db.query("DROP DATABASE test", (error) => {
+        db.query("DROP DATABASE ctf1", (error) => {
             if (error) reject(error);
             console.log("Database dropped Successfully");
 
-            db.query("CREATE DATABASE test", (error) => {
+            db.query("CREATE DATABASE ctf1", (error) => {
                 if (error) reject(error);
                 console.log("Database Created Successfully");
 
-                db.query("USE test", (error) => {
+                db.query("USE ctf1", (error) => {
                     if (error) reject(error);
                     console.log("Using Database");
                     resolve();
