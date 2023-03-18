@@ -13,7 +13,7 @@ const userValues = [
         "ALC",
         "Alice",
         "Larue",
-        "$10$R40b7j5iUfTqHu7fuT9Jlu8RB.o2Egnnmzpbhv5RMIW1oZ2m3R6Qa",
+        "$2b$10$yWC7lBozUkEivGYsbZAIi.br386BvpJIlOeWFd6mFkAKOn4KBFvba",
         "150",
         "alice@gmail.com",
         "default.png",
