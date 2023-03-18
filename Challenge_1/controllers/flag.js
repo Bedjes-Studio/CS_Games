@@ -7,6 +7,7 @@ exports.sql = (req, res, next) => {
     db.query("SELECT value FROM config WHERE attribute = 'slots_config'", function (error, results, fields) {
         fs.readFile(__dirname + "/../" + results[0].value, "utf8", (err, content) => {
             if (err) {
+                console.log("test")
                 console.error(err);
                 res.status(200).json({
                     isFlagged: false,
@@ -19,6 +20,8 @@ exports.sql = (req, res, next) => {
                     flag: "flag{#N1ce:PicTure}",
                 });
             } else {
+                console.log("tesst")
+
                 res.status(200).json({
                     isFlagged: false,
                 });

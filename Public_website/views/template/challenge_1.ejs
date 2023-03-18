@@ -46,7 +46,7 @@
             </script>
             <%} else { %>
             <p class="text-center">
-                Le flag est construit à partir de l'identité du compte usurpé. <br/>
+                Le flag est construit à partir de l'identité du compte usurpé. <br />
                 Sa forme est "flag{prenom_nom}" tout en minuscules.
             </p>
             <div class="form-group d-flex justify-content-center mb-4">
@@ -72,16 +72,21 @@
             <div class="text-center mb-3">
                 <a href="/static/ctf/challenge_1/slots_config.conf" download="slots_config.conf" class="my-auto btn-atlantis btn btn-block">Télécharger le fichier vérolé</a>
             </div>
+
+
+
+
             <% if (challenges[1].challenge.flagged) { %>
             <p class="text-center">Vous avez réussi cette étape.</p>
             <script>
                 $("#step-1-2").addClass('challenge-box-completed');
             </script>
             <%} else { %>
+
             <div class="form-group d-flex justify-content-center mb-4">
-                <p class="me-3 pb-0 my-auto">Flag :</p>
-                <input id="flag-input-1-2" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
-                <a id="flag-button-1-2" type="button" class="my-auto btn-atlantis btn btn-block">Envoyer</a>
+                <div class="text-center">
+                    <a id="flag-button-1-2" type="button" class="my-auto btn-atlantis btn btn-block">Vérifier la configuration</a>
+                </div>
             </div>
             <p id="flag-response-1-2" class="text-center"> </p>
             <% } %>
@@ -229,6 +234,23 @@
 
 
 <script>
+    function checkConfig(challengeId, flag, renderId) {
+        fetch("/api/flag/config", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => response.json())
+            .then((json) => {
+                $(renderId).text(json.message);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     $(document).ready(() => {
 
         $("#flag-button-1-1").on("click", () => {
@@ -240,7 +262,7 @@
         $("#flag-button-1-2").on("click", () => {
             flag = $("#flag-input-1-2").val()
             console.log(flag)
-            checkFlag("1-2", flag, "#flag-response-1-2");
+            checkConfig("1-2", flag, "#flag-response-1-2");
         });
 
         $("#flag-button-1-3").on("click", () => {

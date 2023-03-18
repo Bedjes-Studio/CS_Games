@@ -4,6 +4,46 @@ const HintUsed = require("../models/hintUsed");
 const Hint = require("../models/hint");
 const User = require("../models/user");
 
+exports.config = (req, res, next) => {
+    Challenge.findOne({ challengeId: "1-2" }).then((challenge) => {
+        User.findOne({ username: req.auth.username }).then((user) => {
+            fetch("http://" + user.ip + ":3000/api/flag/sql", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    if (json.isFlagged == true) {
+                        ChallengeWin.findOne({ challengeId: req.body.challengeId, username: req.auth.username }).then((everFlagged) => {
+                            if (!everFlagged) {
+                                computeScore(req.auth.username, challenge.challengeId, challenge.flagValue)
+                                    .then((points) => updateScores(req.auth.username, points))
+                                    .then(() => updateFlaggedList(req.auth.username, challenge.challengeId))
+                                    .then(() => {
+                                        res.status(200).json({ message: "La configuration est bonne !", flagged: true });
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                        res.status(500).json({ error, flagged: false });
+                                    });
+                            } else {
+                                res.status(200).json({ message: "Vous avez déjà une bonne configuration", flagged: true });
+                            }
+                        });
+                    } else {
+                        res.status(200).json({ message: "La configuration n'est pas bonne !", flagged: false });
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        });
+    });
+};
+
 exports.check = (req, res, next) => {
     Challenge.findOne({ challengeId: req.body.challengeId })
         .then((challenge) => {
