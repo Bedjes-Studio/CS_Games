@@ -67,6 +67,7 @@ const userValues = [
 
 const reviewsValues = [
     [0, "Sebia", "Un casino vraiment exeptionnel !", "2023-03-17 20:13:20"],
+    [0, "Sebia", "Un casino vraiment exeptionnel !", "2023-03-17 20:13:20"],
     [1, "Maestro", "J'ai gagné le gros lot et j'ai changé de vie.", "2023-03-15 20:13:20"],
     [2, "Monica", "Avec mes amis, on jouons souvent ici, c'est pas mal fun", "2023-02-01 20:13:20"],
 ];
