@@ -8,6 +8,10 @@
             créer une machine qui gagne tout le temps !
         </p>
 
+        <div class="text-center mb-2">
+            <a id="flag-button-1-3" type="button" href="http://<%-ip%>:3000" class="my-auto btn-atlantis btn btn-block">Mon instance</a>
+        </div>
+
         <!-- Étape -->
         <div class="d-flex flex-warp">
             <div id="step-1-1" class="challenge-box flex-fill p-3 m-2 btn">
@@ -110,6 +114,8 @@
                 D'après nos informations, ce numéro correspond au hash de la position de la machine dans le casino. <br />
                 Une fois la machine trouvée, jouez !
             </p>
+
+
 
             <% if (challenges[2].challenge.flagged) { %>
             <p class="text-center">Vous avez réussi cette étape.</p>

@@ -13,11 +13,14 @@ exports.index = (req, res, next) => {
 
 exports.challenges = (req, res, next) => {
     if (req.auth.isLogged) {
-        computeChallenges(req, res, next).then((results) => {
-            res.render("page/challenges", {
-                isLogged: req.auth.isLogged,
-                username: req.auth.username,
-                challenges: results,
+        User.findOne({ username: req.auth.username }).then((user) => {
+            computeChallenges(req, res, next).then((results) => {
+                res.render("page/challenges", {
+                    isLogged: req.auth.isLogged,
+                    username: req.auth.username,
+                    challenges: results,
+                    ip: user.ip,
+                });
             });
         });
     } else {
