@@ -13,75 +13,77 @@
 
         <!-- Étape -->
         <div class="d-flex flex-warp">
-            <div id="step-1-1" class="challenge-box flex-fill p-3 m-2 btn">
+            <div id="step-3-1" class="challenge-box flex-fill p-3 m-2 btn">
                 <p class=" m-0 p-0">
                     Étape 1<br />
+                    100 points
+                </p>
+            </div>
+
+            <div id="step-3-2" class="challenge-box flex-fill p-3 m-2 btn">
+                <p class=" m-0 p-0">
+                    Étape 2<br />
                     150 points
                 </p>
             </div>
 
-            <div id="step-1-2" class="challenge-box flex-fill p-3 m-2 btn">
-                <p class=" m-0 p-0">
-                    Étape 2<br />
-                    175 points
-                </p>
-            </div>
-
-            <div id="step-1-3" class="challenge-box flex-fill p-3 m-2 btn">
+            <div id="step-3-3" class="challenge-box flex-fill p-3 m-2 btn">
                 <p class=" m-0 p-0">
                     Étape 3<br />
-                    175 points
+                    150 points
                 </p>
             </div>
         </div>
 
         <!-- Descriptions -->
-        <div id="description-chall-1-1">
+        <div id="description-chall-3-1">
             <p class="challenge-intro-text">
-                Vous disposez d'un compte client classique. Vos actions sont limités. <br />
-                Trouver le moyen de vous connecter sur un compte avec plus d'autorisations.
-            </p>
-
-            <% if (challenges[0].challenge.flagged) { %>
-            <p class="text-center">Vous avez réussi cette étape.</p>
-            <script>
-                $("#step-1-1").addClass('challenge-box-completed');
-            </script>
-            <%} else { %>
-            <div class="form-group d-flex justify-content-center mb-4">
-                <p class="me-3 pb-0 my-auto">Flag :</p>
-                <input id="flag-input-1-1" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
-                <a id="flag-button-1-1" type="button" class="my-auto btn-atlantis btn btn-block">Envoyer</a>
-            </div>
-            <p id="flag-response-1-1" class="text-center"> </p>
-            <% } %>
-
-
-        </div>
-
-        <div id="description-chall-1-2">
-
-            <% if (challenges[0].challenge.flagged) { %>
-
-            <p class="challenge-intro-text">
-                L'un de nos membre infiltré à créer un fichier de configuration des machines vérolé. <br />
-                À l'aide de vos nouvelles autorisations, trouvez un moyen d'uploader la configuration malveillante et mettez a jour le programme utilisé par les machines.
+                Téléchargez l'image suivante et cherchez des informations.
             </p>
             <div class="text-center mb-3">
-                <a href="/static/ctf/challenge_1/slots_config.conf" download="slots_config.conf" class="my-auto btn-atlantis btn btn-block">Télécharger le fichier vérolé</a>
+                <a href="/static/ctf/challenge_1/slots_config.conf" download="slots_config.conf" class="my-auto btn-atlantis btn btn-block">Télécharger le dos de la carte</a>
             </div>
-            <% if (challenges[1].challenge.flagged) { %>
+
+            <% if (challenges[6].challenge.flagged) { %>
             <p class="text-center">Vous avez réussi cette étape.</p>
             <script>
-                $("#step-1-2").addClass('challenge-box-completed');
+                $("#step-3-1").addClass('challenge-box-completed');
             </script>
             <%} else { %>
             <div class="form-group d-flex justify-content-center mb-4">
                 <p class="me-3 pb-0 my-auto">Flag :</p>
-                <input id="flag-input-1-2" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
-                <a id="flag-button-1-2" type="button" class="my-auto btn-atlantis btn btn-block">Envoyer</a>
+                <input id="flag-input-3-1" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
+                <a id="flag-button-3-1" type="button" class="my-auto btn-atlantis btn btn-block">Envoyer</a>
             </div>
-            <p id="flag-response-1-2" class="text-center"> </p>
+            <p id="flag-response-3-1" class="text-center"> </p>
+            <% } %>
+
+
+        </div>
+
+        <div id="description-chall-3-2">
+
+            <% if (challenges[6].challenge.flagged) { %>
+
+            <p class="challenge-intro-text">
+                Un autre membre du cercle à trouvé la vraie taille de l'image : XXX x XXX <br />
+                Continuez vos recherches sur l'image suivante. <br /><br />
+            </p>
+            <div class="text-center mb-3">
+                <a href="/static/ctf/challenge_1/slots_config.conf" download="slots_config.conf" class="my-auto btn-atlantis btn btn-block">Télécharger le dos de la carte</a>
+            </div>
+            <% if (challenges[7].challenge.flagged) { %>
+            <p class="text-center">Vous avez réussi cette étape.</p>
+            <script>
+                $("#step-3-2").addClass('challenge-box-completed');
+            </script>
+            <%} else { %>
+            <div class="form-group d-flex justify-content-center mb-4">
+                <p class="me-3 pb-0 my-auto">Flag :</p>
+                <input id="flag-input-3-2" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
+                <a id="flag-button-3-2" type="button" class="my-auto btn-atlantis btn btn-block">Envoyer</a>
+            </div>
+            <p id="flag-response-3-2" class="text-center"> </p>
             <% } %>
 
             <%} else { %>
@@ -95,131 +97,121 @@
 
         </div>
 
-        <div id="description-chall-1-3">
-            <% if (challenges[1].challenge.flagged) { %>
+        <div id="description-chall-3-3">
+            <% if (challenges[7].challenge.flagged) { %>
             <p class="challenge-intro-text">
                 Vous y êtes presque ! <br />
-                Pour ne pas être remarqué, seule une machine est corrompue. Son numéro de série est le XXX. <br />
-                D'après nos informations, ce numéro correspond au hash de la position de la machine dans le casino. <br />
-                Une fois la machine trouvée, jouez !
             </p>
 
-            <% if (challenges[2].challenge.flagged) { %>
+            <% if (challenges[8].challenge.flagged) { %>
             <p class="text-center">Vous avez réussi cette étape.</p>
             <script>
-                $("#step-1-3").addClass('challenge-box-completed');
+                $("#step-3-3").addClass('challenge-box-completed');
             </script>
             <%} else { %>
             <div class="form-group d-flex justify-content-center mb-4">
                 <p class="me-3 pb-0 my-auto">Flag :</p>
-                <input id="flag-input-1-3" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
-                <a id="flag-button-1-3" type="button" class="my-auto btn-atlantis btn btn-block">Envoyer</a>
+                <input id="flag-input-3-3" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
+                <a id="flag-button-3-3" type="button" class="my-auto btn-atlantis btn btn-block">Envoyer</a>
             </div>
-            <p id="flag-response-1-3" class="text-center"> </p>
+            <p id="flag-response-3-3" class="text-center"> </p>
             <% } %>
             <%} else { %>
             <p class="challenge-intro-text">
                 Terminez l'étape précédente pour pouvoir commencer celle-ci.
             </p>
-
             <% } %>
-
-
-
-
-
         </div>
 
         <!-- Indices -->
-        <div id="hint-1-1">
+        <div id="hint-3-1">
             <div class="d-flex hint-blox p-4 mb-3">
                 <div class="flex-fill text-left">
 
                     <p class="m-0 p-0">
-                        Indice 1-1-1 :
-                        <% if (challenges[0].hint[0].used) { %>
-                        L'authentification du casino est basée sur des cookies.
+                        Indice 3-1-1 :
+                        <% if (challenges[6].hint[0].used) { %>
+                        Le fichier semble un peu trop volumineux pour une image de seulement 870x1350
                         <%} else { %>
                         Cet indice n'est pas encore utilisé.
                         <% } %>
                     </p>
                 </div>
-                <a type="button" href="/api/flag/useHint/1-1-1" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
+                <a type="button" href="/api/flag/useHint/3-1-1" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
             </div>
 
             <div class="d-flex hint-blox p-4 mb-3">
                 <div class="flex-fill text-left">
                     <p class="m-0 p-0">
-                        Indice 1-1-2 :
-                        <% if (challenges[0].hint[1].used) { %>
-                        Trouvez un endroit ou vous pouvez écrire du texte et faites en sorte que votre victime écrive son cookie publiquement !
+                        Indice 3-1-2 :
+                        <% if (challenges[6].hint[1].used) { %>
+                        La hauteur de l'image à été réduite fortement.
                         <%} else { %>
                         Cet indice n'est pas encore utilisé.
                         <% } %>
                     </p>
                 </div>
-                <a type="button" href="/api/flag/useHint/1-1-2" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
-            </div>
-        </div>
-
-        <div id="hint-1-2">
-            <div class="d-flex hint-blox p-4 mb-3">
-                <div class="flex-fill text-left">
-                    <p class="m-0 p-0">
-                        Indice 1-2-1 :
-                        <% if (challenges[1].hint[0].used) { %>
-                        La photo de profil de chaque utilisateur est stockée sur le serveur.
-                        <%} else { %>
-                        Cet indice n'est pas encore utilisé.
-                        <% } %>
-                    </p>
-                </div>
-                <a type="button" href="/api/flag/useHint/1-2-1" class="my-auto btn-atlantis  btn btn-block">Utiliser</a>
-            </div>
-
-            <div class="d-flex hint-blox p-4 mb-3">
-                <div class="flex-fill text-left">
-                    <p class="m-0 p-0">
-                        Indice 1-2-2 :
-                        <% if (challenges[1].hint[1].used) { %>
-                        Le serveur vérifie l'extension des fichiers mais pas le contenu. <br />
-                        Le frimeware des machines est configuré dans la table "conf".
-                        <%} else { %>
-                        Cet indice n'est pas encore utilisé.
-                        <% } %>
-                    </p>
-                </div>
-                <a type="button" href="/api/flag/useHint/1-2-2" class="my-auto btn-atlantis  btn btn-block">Utiliser</a>
+                <a type="button" href="/api/flag/useHint/3-1-2" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
             </div>
         </div>
 
-        <div id="hint-1-3">
+        <div id="hint-3-2">
             <div class="d-flex hint-blox p-4 mb-3">
                 <div class="flex-fill text-left">
                     <p class="m-0 p-0">
-                        Indice 1-3-1 :
-                        <% if (challenges[2].hint[0].used) { %>
-                        Avez-vous regardé la configuration du serveur suffisament ?
+                        Indice 3-2-1 :
+                        <% if (challenges[7].hint[0].used) { %>
+                        Les fenêtres les plus éclairées ont une signification binaire.
                         <%} else { %>
                         Cet indice n'est pas encore utilisé.
                         <% } %>
                     </p>
                 </div>
-                <a type="button" href="/api/flag/useHint/1-3-1" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
+                <a type="button" href="/api/flag/useHint/3-2-1" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
             </div>
 
             <div class="d-flex hint-blox p-4 mb-3">
                 <div class="flex-fill text-left">
                     <p class="m-0 p-0">
-                        Indice 1-3-2 :
-                        <% if (challenges[2].hint[1].used) { %>
-                        La meilleure méthode n'est parfois pas la plus douce.
+                        Indice 3-2-2 :
+                        <% if (challenges[7].hint[1].used) { %>
+                        Un outil de stéganographie open source à été utilisé.
                         <%} else { %>
                         Cet indice n'est pas encore utilisé.
                         <% } %>
                     </p>
                 </div>
-                <a type="button" href="/api/flag/useHint/1-3-2" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
+                <a type="button" href="/api/flag/useHint/3-2-2" class="my-auto btn-atlantis  btn btn-block">Utiliser</a>
+            </div>
+        </div>
+
+        <div id="hint-3-3">
+            <div class="d-flex hint-blox p-4 mb-3">
+                <div class="flex-fill text-left">
+                    <p class="m-0 p-0">
+                        Indice 3-3-1 :
+                        <% if (challenges[8].hint[0].used) { %>
+                        Les clés AES sont sur 256 bits.
+                        <%} else { %>
+                        Cet indice n'est pas encore utilisé.
+                        <% } %>
+                    </p>
+                </div>
+                <a type="button" href="/api/flag/useHint/3-3-1" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
+            </div>
+
+            <div class="d-flex hint-blox p-4 mb-3">
+                <div class="flex-fill text-left">
+                    <p class="m-0 p-0">
+                        Indice 3-3-2 :
+                        <% if (challenges[8].hint[1].used) { %>
+                        Le nom du fichier n'est pas généré aléatoirement.
+                        <%} else { %>
+                        Cet indice n'est pas encore utilisé.
+                        <% } %>
+                    </p>
+                </div>
+                <a type="button" href="/api/flag/useHint/3-3-2" class="my-auto btn-atlantis btn btn-block">Utiliser</a>
             </div>
         </div>
     </div>
@@ -229,72 +221,72 @@
 <script>
     $(document).ready(() => {
 
-        $("#flag-button-1-1").on("click", () => {
-            flag = $("#flag-input-1-1").val()
+        $("#flag-button-3-1").on("click", () => {
+            flag = $("#flag-input-3-1").val()
             console.log(flag)
-            checkFlag("1-1", flag, "#flag-response-1-1");
+            checkFlag("3-1", flag, "#flag-response-3-1");
         });
 
-        $("#flag-button-1-2").on("click", () => {
-            flag = $("#flag-input-1-2").val()
+        $("#flag-button-3-2").on("click", () => {
+            flag = $("#flag-input-3-2").val()
             console.log(flag)
-            checkFlag("1-2", flag, "#flag-response-1-2");
+            checkFlag("3-2", flag, "#flag-response-3-2");
         });
 
-        $("#flag-button-1-3").on("click", () => {
-            flag = $("#flag-input-1-3").val()
+        $("#flag-button-3-3").on("click", () => {
+            flag = $("#flag-input-3-3").val()
             console.log(flag)
-            checkFlag("1-3", flag, "#flag-response-1-3");
+            checkFlag("3-3", flag, "#flag-response-3-3");
         });
 
 
-        $("#step-1-1").on("click", () => {
+        $("#step-3-1").on("click", () => {
 
-            $('#step-1-1').addClass("challenge-box-selected");
-            $('#step-1-2').removeClass("challenge-box-selected");
-            $('#step-1-3').removeClass("challenge-box-selected");
+            $('#step-3-1').addClass("challenge-box-selected");
+            $('#step-3-2').removeClass("challenge-box-selected");
+            $('#step-3-3').removeClass("challenge-box-selected");
 
-            $('#description-chall-1-1').show();
-            $('#description-chall-1-2').hide();
-            $('#description-chall-1-3').hide();
+            $('#description-chall-3-1').show();
+            $('#description-chall-3-2').hide();
+            $('#description-chall-3-3').hide();
 
-            $('#hint-1-1').show();
-            $('#hint-1-2').hide();
-            $('#hint-1-3').hide();
+            $('#hint-3-1').show();
+            $('#hint-3-2').hide();
+            $('#hint-3-3').hide();
 
 
         });
 
-        $("#step-1-2").on("click", () => {
+        $("#step-3-2").on("click", () => {
 
-            $('#step-1-1').removeClass("challenge-box-selected");
-            $('#step-1-2').addClass("challenge-box-selected");
-            $('#step-1-3').removeClass("challenge-box-selected");
+            $('#step-3-1').removeClass("challenge-box-selected");
+            $('#step-3-2').addClass("challenge-box-selected");
+            $('#step-3-3').removeClass("challenge-box-selected");
 
-            $('#description-chall-1-1').hide();
-            $('#description-chall-1-2').show();
-            $('#description-chall-1-3').hide();
+            $('#description-chall-3-1').hide();
+            $('#description-chall-3-2').show();
+            $('#description-chall-3-3').hide();
 
-            $('#hint-1-1').hide();
-            $('#hint-1-2').show();
-            $('#hint-1-3').hide();
+            $('#hint-3-1').hide();
+            $('#hint-3-2').show();
+            $('#hint-3-3').hide();
         });
 
-        $("#step-1-3").on("click", () => {
+        $("#step-3-3").on("click", () => {
 
-            $('#step-1-1').removeClass("challenge-box-selected");
-            $('#step-1-2').removeClass("challenge-box-selected");
-            $('#step-1-3').addClass("challenge-box-selected");
+            $('#step-3-1').removeClass("challenge-box-selected");
+            $('#step-3-2').removeClass("challenge-box-selected");
+            $('#step-3-3').addClass("challenge-box-selected");
 
-            $('#description-chall-1-1').hide();
-            $('#description-chall-1-2').hide();
-            $('#description-chall-1-3').show();
+            $('#description-chall-3-1').hide();
+            $('#description-chall-3-2').hide();
+            $('#description-chall-3-3').show();
 
-            $('#hint-1-1').hide();
-            $('#hint-1-2').hide();
-            $('#hint-1-3').show();
+            $('#hint-3-1').hide();
+            $('#hint-3-2').hide();
+            $('#hint-3-3').show();
         });
 
-        $('#step-1-1').trigger('click');
+        $('#step-3-1').trigger('click');
     });
 </script>

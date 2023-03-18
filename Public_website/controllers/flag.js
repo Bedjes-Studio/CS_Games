@@ -45,7 +45,7 @@ const computeScore = function (username, challengeId, initialValue) {
                 if (!hintUsed) {
                     resolve(initialValue);
                 } else {
-                    resolve(initialValue - initialValue * 0 * hintUsed.length);
+                    resolve(initialValue - initialValue * 0.25 * hintUsed.length);
                 }
             })
             .catch((error) => {
@@ -199,6 +199,7 @@ function isFlagged(challengeWin, challengeId) {
 exports.useHint = (req, res, next) => {
     HintUsed.find({ hintId: req.params.id, username: req.auth.username }).then((hintUsed) => {
         if (hintUsed.length == 0) {
+
             Hint.find({ hintId: req.params.id }).then((hint) => {
                 if (!hint) {
                     return res.status(401).json({ message: "Indice non trouvé !" });

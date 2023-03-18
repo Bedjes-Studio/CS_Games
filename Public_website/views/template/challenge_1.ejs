@@ -45,6 +45,10 @@
                 $("#step-1-1").addClass('challenge-box-completed');
             </script>
             <%} else { %>
+            <p class="text-center">
+                Le flag est construit à partir de l'identité du compte usurpé. <br/>
+                Sa forme est "flag{prenom_nom}" tout en minuscules.
+            </p>
             <div class="form-group d-flex justify-content-center mb-4">
                 <p class="me-3 pb-0 my-auto">Flag :</p>
                 <input id="flag-input-1-1" type="text" class="form-control w-50 me-3" placeholder="flag{...}">
@@ -56,6 +60,7 @@
 
         </div>
 
+        <!-- TODO CHECK AVEC L'AUTRE SERVEUR -->
         <div id="description-chall-1-2">
 
             <% if (challenges[0].challenge.flagged) { %>
@@ -224,8 +229,6 @@
 
 
 <script>
-    
-
     $(document).ready(() => {
 
         $("#flag-button-1-1").on("click", () => {
