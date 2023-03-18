@@ -26,43 +26,33 @@
             </div>
         </div>
 
-        <div class="section">
-            <h1 class="section-title">Challenge 1 : Machines à sous</h1>
-            <div class="section-content">
-                <div class="d-flex flex-warp">
-                    <% for(var i=0; i < 3; i++) { %>
-                    <%- include('../template/step', {id: challenges[i].challenge.challengeId, number: i + 1,descLocation:'#description-chall-1', description: challenges[i].challenge.description, hints:challenges[i].hint} ); %>
-                    <% } %>
-                </div>
-                <p id="description-chall-1" class="challenge-intro-text"></p>
-                <%- include('../template/hint', {id: "1-1", number: 1, description: " : " + "", hintId: ""}); %>
-                <%- include('../template/hint', {id: "1-2", number: 2, description: " : " + "",  hintId: ""}); %>
-            </div>
-        </div>
+        <%- include('../template/challenge_1', {challenges}); %>
+        <%- include('../template/challenge_3', {challenges}); %>
+
 
         <script>
-            $(document).ready(() => {
-                $('#step-1-1').trigger('click');
-            });
-
-            function showDescription(location, description) {
-                $(location).text(description);
-            }
-
-            function showHint(id, number, description, hintId) {
-                hintBoxId = "#hint-" + id
-                hintButtonId = "#hint-button-" + id
-                console.log(hintBoxId)
-                console.log(hintButtonId)
-                console.log(hintId)
-                $(hintBoxId).text("Indice " + number + " : " + description);
-                $(hintButtonId).attr("href", "/api/flag/useHint/" + hintId);
-            }
-
-            function selectStep(id) {
-            // TODO 
+            function checkFlag(challengeId, flag, renderId) {
+                fetch("/api/flag/check", {
+                        method: "POST",
+                        headers: {
+                            Accept: "application/json, text/plain, */*",
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            challengeId: challengeId,
+                            flag: flag,
+                        }),
+                    })
+                    .then((response) => response.json())
+                    .then((json) => {
+                        $(renderId).text(json.message);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
         </script>
+
     </main>
 
     <footer>

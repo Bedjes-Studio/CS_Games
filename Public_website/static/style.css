@@ -176,8 +176,16 @@ footer {
     color: white;
 }
 
+.challenge-box-selected {
+    background-color: #165fa8 !important;
+}
+
+.challenge-box-completed {
+    background-color: #16a858 !important;
+}
+
 .challenge-box:hover {
-    background-color: #114e8b;
+    background-color: #165fa8;
     color: white;
 }
 

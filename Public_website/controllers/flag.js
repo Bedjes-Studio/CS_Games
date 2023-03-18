@@ -18,7 +18,6 @@ exports.check = (req, res, next) => {
                             .then((points) => updateScores(req.auth.username, points))
                             .then(() => updateFlaggedList(req.auth.username, challenge.challengeId))
                             .then(() => {
-                                console.log("WTF");
                                 res.status(200).json({ message: "C'est le bon flag !", flagged: true });
                             })
                             .catch((error) => {
@@ -46,7 +45,7 @@ const computeScore = function (username, challengeId, initialValue) {
                 if (!hintUsed) {
                     resolve(initialValue);
                 } else {
-                    resolve(initialValue - initialValue * 0.15 * hintUsed.length);
+                    resolve(initialValue - initialValue * 0 * hintUsed.length);
                 }
             })
             .catch((error) => {
@@ -57,8 +56,6 @@ const computeScore = function (username, challengeId, initialValue) {
 
 const updateScores = function (username, points) {
     return new Promise(function (resolve, reject) {
-        console.log("points : " + points);
-
         User.updateOne({ username: username }, { $inc: { score: points } })
             .then(() => {
                 resolve();
@@ -127,15 +124,13 @@ const computeChallenges = function (req, res, next) {
                     hintUsed.forEach((hint) => {
                         hintUsedIds.push(hint.hintId);
                     });
-                    // TODO : remove cheat mode
                     Hint.find({ hintId: { $in: hintUsedIds } }).then((hints) => {
-                        // Hint.find().then((hints) => {
                         ChallengeWin.find({ username: req.auth.username }).then((challengeWin) => {
                             results = [];
                             challenges.forEach((challenge) => {
                                 flagged = false;
 
-                                if (challengeWin.includes(challenge.challengeId)) {
+                                if (isFlagged(challengeWin, challenge.challengeId)) {
                                     flagged = true;
                                 }
                                 chall = {
@@ -151,12 +146,9 @@ const computeChallenges = function (req, res, next) {
                                     // search if int is used and add it
                                     if (hintUsedIds.includes(hintId)) {
                                         h = getHintFromId(hintId, hints);
-                                        hint.push({ hintId: hintId, description: h.description });
+                                        hint.push({ hintId: hintId, used: true, description: h.description });
                                     } else {
-                                        // TODO cheat mode
-                                        // h = getHintFromId(hintId, hints);
-                                        // hint.push({ hintId: hintId, description: h.description });
-                                        hint.push({ hintId: hintId, description: "" });
+                                        hint.push({ hintId: hintId, used: false, description: "" });
                                     }
                                 });
                                 results.push({ challenge: chall, hint: hint });
@@ -193,6 +185,15 @@ function getHintFromId(hintId, hints) {
         }
     }
     return undefined;
+}
+
+function isFlagged(challengeWin, challengeId) {
+    for (const challenge of challengeWin) {
+        if (challenge.challengeId == challengeId) {
+            return true;
+        }
+    }
+    return false;
 }
 
 exports.useHint = (req, res, next) => {
