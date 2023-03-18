@@ -103,7 +103,7 @@ const computeRanking = function (username, challengeId) {
             .then((users) => {
                 ranking = [];
                 users.forEach((user) => {
-                    ranking.push({ Équipe: user.username, Score: user.score });
+                    ranking.push({ Université: user.school, Équipe: user.username, Score: user.score });
                 });
                 resolve(ranking);
             })
@@ -134,9 +134,7 @@ const computeChallenges = function (req, res, next) {
                                     flagged = true;
                                 }
                                 chall = {
-                                    name: challenge.name,
                                     challengeId: challenge.challengeId,
-                                    description: challenge.description,
                                     flagValue: challenge.flagValue,
                                     flagged: flagged,
                                 };
@@ -146,9 +144,9 @@ const computeChallenges = function (req, res, next) {
                                     // search if int is used and add it
                                     if (hintUsedIds.includes(hintId)) {
                                         h = getHintFromId(hintId, hints);
-                                        hint.push({ hintId: hintId, used: true, description: h.description });
+                                        hint.push({ hintId: hintId, used: true });
                                     } else {
-                                        hint.push({ hintId: hintId, used: false, description: "" });
+                                        hint.push({ hintId: hintId, used: false });
                                     }
                                 });
                                 results.push({ challenge: chall, hint: hint });
@@ -199,7 +197,6 @@ function isFlagged(challengeWin, challengeId) {
 exports.useHint = (req, res, next) => {
     HintUsed.find({ hintId: req.params.id, username: req.auth.username }).then((hintUsed) => {
         if (hintUsed.length == 0) {
-
             Hint.find({ hintId: req.params.id }).then((hint) => {
                 if (!hint) {
                     return res.status(401).json({ message: "Indice non trouvé !" });

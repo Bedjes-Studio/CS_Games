@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const hintSchema = mongoose.Schema({
-    description: { type: String, required: true },
     hintId: { type: String, required: true },
 });
 
