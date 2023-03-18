@@ -24,7 +24,7 @@ const userValues = [
         "Admin",
         "Frank",
         "Catton",
-        "$10$d3ZAH0g2SNmGDzcdno2slO7CtmNV1CyZgI8IkZzQiZ/aHM2RejxUK",
+        "$2b$10$BYAYQ3Ac78k6qnuCkMH3hupDUfJk7hBr1FW9thcnMDtnU61/88jm6",
         "1",
         "frank@gmail.com",
         "default.png",
