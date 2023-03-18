@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
             let username = decodedToken.username;
             let isAdmin = false;
             // TODO : choose admin account
-            if (username == "bob") {
+            if (username == "Admin") {
                 isAdmin = true;
             }
 
