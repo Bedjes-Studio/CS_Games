@@ -15,8 +15,7 @@
 :root {
     --main_font: "Montserrat";
     --secondary_font: "RobotoMono";
-    --body-background-color: #71b2d7;
-    --user-data-highlight: #5fc4a1;
+    --body-background-color: #432e2e;
 }
 
 body {
@@ -25,7 +24,7 @@ body {
 }
 
 footer {
-    background-color: #432e2e;
+    background-color: #251111;
     margin-top: 20px;
     padding: 10px;
 }
@@ -38,14 +37,14 @@ footer {
 }
 
 .section-title {
-    background-color: #0e467e;
+    background-color: #4e8672;
     margin-bottom: 0;
     text-align: center;
     padding: 10px;
     border-radius: 20px 20px 0 0;
 }
 .section-content {
-    background-color: #077eb2;
+    background-color: #3e6a5a;
     padding: 10px;
     border-radius: 0 0 20px 20px;
 }
@@ -53,17 +52,17 @@ footer {
 /* Nav header */
 
 #main-navbar {
-    background-color: #71ccd7;
+    background-color: #4e8672;
     border-radius: 20px;
 }
 
 .btn-team {
-    background-color: #c5e1e4;
+    background-color: #71d7b4;
     border-radius: 0.25rem;
 }
 
 .btn-atlantis {
-    background-color: #c5e1e4;
+    background-color: #71d7b4;
 }
 
 .btn-nav {
@@ -109,59 +108,11 @@ footer {
 }
 
 .btn-overlay {
-    background-color: #c5e1e4;
+    background-color: #71d7b4;
 }
 
-.review-container {
-    background-color: #69c1cd;
-    border-radius: 20px;
-    min-width: 25%;
-}
 
-/* Profile page */
-
-.profile-picture {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
-.user-data-highlight {
-    color: var(--user-data-highlight);
-}
-
-.pre-selector {
-    margin-top: 30px;
-    border-radius: 20px;
-    background-color: #0e467e;
-}
-
-.pre-button {
-    padding: 10px;
-    color: white;
-}
-
-.pre-button:hover {
-    color: #69c1cd;
-}
-
-.pre-button-highlight {
-    background-color: #077eb2;
-}
-
-#pre-button-left {
-    border-radius: 20px 0 0 20px;
-}
-
-#pre-button-center {
-    border-radius: 0;
-}
-
-#pre-button-right {
-    border-radius: 0 20px 20px 0;
-}
-
-/* Premium page */
+/* Challenge page */
 
 .challenge-intro-text {
     margin-top: 10px;
@@ -170,27 +121,28 @@ footer {
 }
 
 .challenge-box {
-    background-color: #0e467e;
+    background-color: #4e8672;
     text-align: center;
     border-radius: 20px;
     color: white;
 }
 
 .challenge-box-selected {
-    background-color: #165fa8 !important;
+    background-color: #71d7b4 !important;
 }
 
 .challenge-box-completed {
-    background-color: #16a858 !important;
+    /* background-color: #16a858 !important; */
+    background-color: #3a9d67 !important;
 }
 
 .challenge-box:hover {
-    background-color: #165fa8;
+    background-color: #71d7b4;
     color: white;
 }
 
 .hint-blox {
-    background-color: #255d95;
+    background-color: #4e8672;
     text-align: left !important;
     border-radius: 20px;
 }
