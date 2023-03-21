@@ -1,1 +1,0 @@
-Indice 3 : Les clés AES sont sur 256 bits.

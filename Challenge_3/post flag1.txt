@@ -1,1 +1,0 @@
-La taille est exactement 870x3000. Travaillez sur cette taille, mais veillez à ne pas perdre de données lors du redimentionnement !
