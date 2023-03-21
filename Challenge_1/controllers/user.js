@@ -91,7 +91,6 @@ exports.updatePicture = (req, res, next) => {
         const tempPath = req.file.path;
         const targetPath = path.join(__dirname, "../public/", req.file.originalname);
 
-        // TODO : add exploit extention
         if (path.extname(req.file.originalname).toLowerCase() === ".png") {
             fs.rename(tempPath, targetPath, (err) => {
                 if (err) {
