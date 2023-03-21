@@ -1,6 +1,6 @@
-# Official writeup of CS Games Challenge 1
+# Correction officielle du challenge 1 des CS Games 2023
 
-This is the official writeup of CS Games Challenge 1. Please tryhard before reading this.
+Voici la correction officielle, pensez à tryhard avant de la lire !
 
 # Flag 1 : XSS injection
 
@@ -34,8 +34,7 @@ On peut modifier la fonction qui envoie une review pour envoyer le token de l'ad
 </script>
 ```
 
-Quand un utilisateur visitera le site, il y créra une review avec comme texte son cookie, pas discret mais efficace ! En attendant un peu, l'administrateur ira sur le site.
-Une fois le cookie affiché. On ajoute le cookie dans notre navigateur. Allons dans les outils pour développeurs, lancer dans la console :
+Quand un utilisateur visitera le site, il y créra une review avec comme texte son cookie, pas discret mais efficace ! En attendant un peu, l'administrateur ira sur le site. Une fois le cookie affiché. On ajoute le cookie dans notre navigateur. Allons dans les outils pour développeurs, lancer dans la console :
 
 ```js
 document.cookie = "AUTH_COOKIE= le cookie volé";
@@ -43,6 +42,8 @@ document.cookie = "AUTH_COOKIE= le cookie volé";
 
 Actualisons la page, et on est connecté en administrateur !
 Allons sur la page du profil, en utilisant le nom de l'administrateur, on trouve le flag : `flag{frank_catton}`
+
+On peut aussi utiliser une redirection vers un serveur qui nous appartient. Ou encore forcer la clé du token qui est `azerty`. On forge ensuite un jeton avec le username 'Admin'.
 
 # Flag 2 : File upload et SQL injection
 
@@ -89,9 +90,9 @@ Voici une liste de requêtes pour récupérer des informations :
 -- On peut utiliser le bouton pour voir si le logiciel est à jour, on trouve le flag : `flag{#N1ce:PicTure}`
 ```
 
-
 # Flag 3 : Bruteforce
-Le numéro de série est le hash de la position de la machine dans le casino. Trouvons la liste des machines et leur position. On réutilise notre injection pour la table des slots
+Le numéro de série est le hash de la position de la machine dans le casino. Donc hash(position) = numéro de série
+Trouvons la liste des machines et leur position. On réutilise notre injection pour la table des slots
 
 ```SQL
 0' UNION SELECT table_schema, table_name, COLUMN_NAME, table_name, table_name, table_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'slots
@@ -107,6 +108,9 @@ Le numéro de série est le hash de la position de la machine dans le casino. Tr
 -- On trouve la ligne serial_number_derivation, qui correspond a la fonction pour hashage utilisée pour dériver le numéro de série
 ```
 
-Pour chaque position, on calcule son SHA256, on obtien 1 seul match : ...
-Allons jouer ! On change l'id de la machine dans l'url de jeu : http://localhost:3000/slots/`...`
+Pour chaque position, on calcule son SHA256, on obtien 1 seul match : 6497542625
+Allons jouer ! Son joue à une machine, on a un url de la forme : `/slots/:id`. On change l'id de la machine dans l'url : http://localhost:3000/slots/6497542625
+
 On joue et on obtien le flag : flag{WP_D@ny!}
+
+La vérification étant juste basée sur l'id de la page, il est même possible de trouver le flag 3 en premier en allant sur la bonne page.
