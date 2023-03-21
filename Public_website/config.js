@@ -4,7 +4,7 @@ let env = process.env.NODE_ENV.trim(); // 'dev' or 'prod'
 
 const dev = {
     server: {
-        port: parseInt(process.env.DEV_SERVER_PORT) || 80,
+        port: parseInt(process.env.DEV_SERVER_PORT) || 3000,
         key: parseInt(process.env.DEV_SERVER_KEY) || "azerty",
         tokenDuration: parseInt(process.env.DEV_SERVER_TOKEN_DURATION) || "24h",
     },
@@ -17,7 +17,7 @@ const dev = {
 
 const prod = {
     server: {
-        port: parseInt(process.env.PROD_SERVER_PORT) || 3000,
+        port: parseInt(process.env.PROD_SERVER_PORT) || 80,
         key: parseInt(process.env.PROD_SERVER_KEY) || "azerty",
         tokenDuration: parseInt(process.env.PROD_SERVER_TOKEN_DURATION) || "24h",
     },
